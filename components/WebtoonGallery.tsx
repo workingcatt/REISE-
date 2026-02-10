@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { WEBTOON_EPISODES } from '../constants';
-import { BookOpen, ArrowRight, Sparkles, PlayCircle, Star, Crown } from 'lucide-react';
+import { Crown, ArrowRight } from 'lucide-react';
 
 export const WebtoonGallery: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startY, setStartY] = useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if(!scrollRef.current) return;
+    setIsDragging(true);
+    setStartY(e.pageY);
+    setScrollTop(scrollRef.current.scrollTop);
+  };
+
+  const onMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const y = e.pageY;
+    const walk = (y - startY) * 2; // Speed multiplier for drag
+    scrollRef.current.scrollTop = scrollTop - walk;
+  };
+
   return (
-    <section className="relative py-40 overflow-hidden bg-[#020410]">
+    <section className="relative py-32 bg-[#020410]">
         
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-             {/* Center Glow */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/5 blur-[150px] rounded-full"></div>
              
-             {/* Magic Circles Decoration (SVG) */}
              <div className="absolute top-0 right-0 opacity-10 animate-[spin_60s_linear_infinite]">
                 <svg width="600" height="600" viewBox="0 0 600 600">
                     <circle cx="300" cy="300" r="280" fill="none" stroke="currentColor" className="text-indigo-400" strokeWidth="1" strokeDasharray="10 5" />
@@ -20,7 +46,6 @@ export const WebtoonGallery: React.FC = () => {
                 </svg>
              </div>
 
-             {/* Floating Particles */}
              {Array.from({ length: 20 }).map((_, i) => (
                <div 
                  key={i}
@@ -38,83 +63,63 @@ export const WebtoonGallery: React.FC = () => {
              ))}
         </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
         
         {/* Decorative Header */}
-        <div className="text-center mb-24 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-1 bg-gradient-to-r from-transparent via-indigo-900/50 to-transparent"></div>
-          <div className="inline-flex flex-col items-center bg-[#020410] px-10 relative z-10">
+        <div className="text-center mb-10 relative">
+          <div className="inline-flex flex-col items-center relative z-10">
              <div className="flex items-center gap-2 text-reise-gold mb-2">
                  <div className="h-[1px] w-8 bg-reise-gold"></div>
                  <Crown className="w-5 h-5" />
                  <div className="h-[1px] w-8 bg-reise-gold"></div>
              </div>
-             <h2 className="text-5xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+             <h2 className="text-4xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                 The Chronicles
              </h2>
-             <p className="mt-4 text-indigo-300 font-serif tracking-[0.2em] text-xs uppercase">
-                당신의 여정이 기록되는 곳
+             <p className="mt-4 text-indigo-300 font-serif tracking-[0.2em] text-xs uppercase animate-pulse">
+                드래그하여 스크롤하세요
              </p>
           </div>
         </div>
 
-        {/* 3D Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 perspective-[1000px]">
-          {WEBTOON_EPISODES.map((ep, idx) => (
+        {/* Vertical Drag Scroll Container (Viewer) */}
+        <div className="relative w-full max-w-[600px] mx-auto bg-black border border-indigo-500/20 shadow-2xl rounded-sm overflow-hidden">
+            
+            {/* Scrollable Area */}
             <div 
-                key={ep.id} 
-                className="group relative cursor-pointer transform-style-3d hover:-translate-y-4 hover:rotate-x-2 transition-all duration-500 ease-out"
+                ref={scrollRef}
+                className="h-[75vh] md:h-[85vh] overflow-y-auto cursor-grab active:cursor-grabbing scrollbar-hide select-none flex flex-col bg-black"
+                onMouseDown={onMouseDown}
+                onMouseLeave={onMouseLeave}
+                onMouseUp={onMouseUp}
+                onMouseMove={onMouseMove}
             >
-               {/* Glowing Background Frame */}
-               <div className="absolute -inset-4 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
-
-              {/* Card Container */}
-              <div className="relative bg-[#0a0a0c] border border-indigo-500/30 rounded-lg overflow-hidden shadow-2xl group-hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:border-indigo-400 transition-all duration-300">
+                {WEBTOON_EPISODES.map((ep) => (
+                    <div key={ep.id} className="w-full relative">
+                        {/* Image Strip - No gap, full width */}
+                        <img 
+                            src={ep.thumbnail} 
+                            alt={ep.title} 
+                            draggable={false}
+                            className="w-full h-auto block select-none pointer-events-none"
+                        />
+                    </div>
+                ))}
                 
-                {/* Image Area */}
-                <div className="relative aspect-[3/4] overflow-hidden">
-                   {/* Magical Sheen Effect */}
-                   <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-20"></div>
-
-                   <img 
-                     src={ep.thumbnail} 
-                     alt={ep.title} 
-                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-75 group-hover:brightness-100"
-                   />
-                   
-                   {/* Date Badge */}
-                   <div className="absolute top-4 right-0 bg-black/80 backdrop-blur-md px-3 py-1 border-l border-y border-indigo-500/50 text-[10px] text-indigo-300 font-serif z-10">
-                      {ep.date}
-                   </div>
-
-                   {/* Play Button Overlay */}
-                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 backdrop-brightness-75 group-hover:backdrop-brightness-100">
-                      <div className="w-16 h-16 rounded-full border border-white/50 flex items-center justify-center bg-black/30 backdrop-blur-sm group-hover:scale-110 transition-transform">
-                         <PlayCircle className="w-8 h-8 text-white fill-white/20" />
-                      </div>
-                   </div>
+                {/* End of Content Marker */}
+                <div className="py-12 text-center bg-black">
+                    <p className="text-indigo-500/50 text-xs cinzel tracking-widest">TO BE CONTINUED...</p>
                 </div>
-
-                {/* Text Content */}
-                <div className="p-5 relative">
-                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
-                   
-                   <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-900/50 border border-indigo-500/30 text-indigo-200 cinzel">EPISODE {ep.id}</span>
-                      {idx === 0 && <span className="text-[10px] px-2 py-0.5 rounded bg-red-900/50 border border-red-500/30 text-red-200 cinzel animate-pulse">NEW</span>}
-                   </div>
-
-                   <h3 className="text-xl font-serif font-bold text-white group-hover:text-indigo-300 transition-colors line-clamp-2">
-                      {ep.title}
-                   </h3>
-                </div>
-              </div>
             </div>
-          ))}
+
+            {/* Viewer Frame Overlay Effects */}
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-10"></div>
+            
         </div>
         
         {/* Bottom Action */}
-        <div className="mt-20 flex justify-center">
+        <div className="mt-12 flex justify-center">
             <button className="group relative px-10 py-4 bg-transparent border border-indigo-500/30 overflow-hidden transition-all duration-300 hover:border-indigo-400">
                 <div className="absolute inset-0 bg-indigo-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <div className="relative flex items-center gap-3">

@@ -996,8 +996,7 @@ export const REGIONS: Region[] = [
 ];
 
 export const WEBTOON_EPISODES: WebtoonEpisode[] = [
-  { id: 1, title: "각성 (The Awakening)", date: "2023.10.01", thumbnail: "https://picsum.photos/seed/ep1/300/400" },
-  { id: 2, title: "아클레이 입학식", date: "2023.10.15", thumbnail: "https://picsum.photos/seed/ep2/300/400" },
-  { id: 3, title: "제국의 그림자", date: "2023.11.01", thumbnail: "https://picsum.photos/seed/ep3/300/400" },
-  { id: 4, title: "수상한 여관", date: "2023.11.15", thumbnail: "https://picsum.photos/seed/ep4/300/400" },
+  { id: 1, title: "프롤로그: 여명의 시작", date: "2024.02.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/1.png?_t=1770734905" },
+  { id: 2, title: "제1화: 운명의 만남", date: "2024.02.15", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/2.png?_t=1770734905" },
+  { id: 3, title: "제2화: 아카데미 입학", date: "2024.03.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/3.png?_t=1770734905" },
 ];

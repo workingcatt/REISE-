@@ -33,10 +33,9 @@ const App = () => {
     if (audioRef.current) {
         try {
             await audioRef.current.play();
-            // State update is handled by onPlay event
         } catch (error) {
-            console.error("Audio playback failed:", error);
-            // State update is handled by onPause event (or lack of onPlay)
+            // Silently ignore all playback errors (Interrupted, AbortError, NotAllowedError)
+            // This prevents console spam when toggling rapidly or when autoplay is blocked
         }
     }
   };
@@ -44,7 +43,6 @@ const App = () => {
   const pauseAudio = () => {
       if (audioRef.current) {
           audioRef.current.pause();
-          // State update is handled by onPause event
       }
   };
 
@@ -91,7 +89,6 @@ const App = () => {
         ref={audioRef} 
         loop 
         preload="auto"
-        // Updated to a reliable source
         src="https://cdn.pixabay.com/audio/2021/08/08/audio_88447e769f.mp3"
         onPlay={() => setIsMusicPlaying(true)}
         onPause={() => setIsMusicPlaying(false)}
