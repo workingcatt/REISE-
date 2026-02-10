@@ -1,13 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { consultGoddess } from '../services/geminiService';
-import { GODDESSES } from '../constants';
-import { OracleResponse } from '../types';
-import { Sparkles, Send, XCircle, Stars, RefreshCw, MessageCircle } from 'lucide-react';
-
-interface ChatHistoryItem {
-  role: 'goddess' | 'user';
-  text: string;
-}
+import React, { useState, useEffect } from 'react';
+import { GODDESSES, REGIONS } from '../constants';
+import { OracleResponse, QuizOption } from '../types';
+import { Sparkles, XCircle, Stars, RefreshCw, MessageCircle } from 'lucide-react';
 
 const LOADING_MESSAGES = [
   "별들의 기억을 읽는 중...",
@@ -19,27 +13,16 @@ const LOADING_MESSAGES = [
 
 export const OracleSection: React.FC = () => {
   const [selectedGoddessId, setSelectedGoddessId] = useState<string | null>(null);
-  const [step, setStep] = useState<'intro' | 'answering' | 'result'>('intro');
-  const [userInput, setUserInput] = useState('');
+  const [step, setStep] = useState<'intro' | 'answering' | 'calculating' | 'result'>('intro');
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<QuizOption[]>([]);
+  
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState<ChatHistoryItem[]>([]);
-  const [currentQuestion, setCurrentQuestion] = useState<string>('');
-  const [currentTurn, setCurrentTurn] = useState(1);
-  const [currentEmotion, setCurrentEmotion] = useState(1);
+  const [loadingMsgIndex, setLoadingMsgIndex] = useState(0);
+  
   const [finalResult, setFinalResult] = useState<OracleResponse | null>(null);
   
-  // Dynamic Loading Message State
-  const [loadingMsgIndex, setLoadingMsgIndex] = useState(0);
-
-  const inputRef = useRef<HTMLInputElement>(null);
   const selectedGoddess = GODDESSES.find(g => g.id === selectedGoddessId);
-
-  // Auto-focus input when entering answering step
-  useEffect(() => {
-    if (step === 'answering' && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [step, currentTurn]);
 
   // Loading Message Rotation Effect
   useEffect(() => {
@@ -53,20 +36,13 @@ export const OracleSection: React.FC = () => {
     return () => clearInterval(interval);
   }, [loading]);
 
-  // Reset and Initialize when goddess is selected (Switching Goddesses resets everything)
+  // Reset and Initialize when goddess is selected
   useEffect(() => {
     if (selectedGoddess) {
        setStep('intro');
-       setHistory([]);
-       setCurrentTurn(1);
-       setUserInput('');
+       setCurrentQuestionIndex(0);
+       setUserAnswers([]);
        setLoading(false);
-       
-       // Pick a random initial question from the array
-       const randomIndex = Math.floor(Math.random() * selectedGoddess.initialQuestions.length);
-       setCurrentQuestion(selectedGoddess.initialQuestions[randomIndex]); 
-       
-       setCurrentEmotion(1);
        setFinalResult(null);
        
        const el = document.getElementById('oracle-interface');
@@ -74,79 +50,103 @@ export const OracleSection: React.FC = () => {
     }
   }, [selectedGoddessId]);
 
-  const handleStartAnswering = () => {
+  const handleStartQuiz = () => {
     setStep('answering');
   };
 
-  const handleSubmitAnswer = async () => {
-    if (!userInput.trim() || !selectedGoddessId) return;
-    
-    const answerText = userInput;
-    setUserInput(''); // Clear input immediately
-    setLoading(true);
+  const handleOptionSelect = (option: QuizOption) => {
+    // Add answer
+    const newAnswers = [...userAnswers, option];
+    setUserAnswers(newAnswers);
 
-    // Update history with User's answer
-    const newHistory: ChatHistoryItem[] = [
-      ...history,
-      { role: 'goddess', text: currentQuestion },
-      { role: 'user', text: answerText }
-    ];
-    setHistory(newHistory);
-    
-    try {
-      // API Call
-      const result = await consultGoddess(selectedGoddessId, newHistory, currentTurn);
-      
-      if (result.type === 'question' && result.nextQuestion) {
-        // Prepare for next turn
-        setCurrentQuestion(result.nextQuestion);
-        setCurrentEmotion(result.emotion);
-        setCurrentTurn(prev => prev + 1);
-      } else if (result.type === 'result') {
-        // Show Final Result
-        setFinalResult(result);
-        setCurrentEmotion(result.emotion);
-        setStep('result');
-      } else {
-        // Fallback: If type is 'question' but missing text, or unknown type.
-        // We force a result to prevent getting stuck.
-        console.warn("Invalid oracle response, forcing result.");
-        setFinalResult({
-           type: 'result',
-           fateTitle: "흐려진 운명",
-           fateDescription: "여신의 목소리가 잠시 닿지 않았습니다. 하지만 당신의 의지는 분명히 전달되었습니다.",
-           affinity: "미지의 영역",
-           soulColor: "무색",
-           potential: "알 수 없음",
-           emotion: 5
-        });
-        setStep('result');
-      }
-    } catch (e) {
-      console.error(e);
-      // Ensure we don't get stuck in loading
-      setFinalResult({
-           type: 'result',
-           fateTitle: "단절된 운명",
-           fateDescription: "알 수 없는 힘에 의해 신탁이 중단되었습니다.",
-           affinity: "공허",
-           soulColor: "암흑",
-           potential: "없음",
-           emotion: 5
-      });
-      setStep('result');
-    } finally {
-      setLoading(false);
+    if (selectedGoddess && currentQuestionIndex < selectedGoddess.quiz.length - 1) {
+        // Move to next question with a small delay for better UX
+        setTimeout(() => {
+            setCurrentQuestionIndex(prev => prev + 1);
+        }, 200);
+    } else {
+        // Finished last question, calculate result
+        setStep('calculating');
+        setLoading(true);
+        setTimeout(() => {
+            calculateResult(newAnswers);
+            setLoading(false);
+            setStep('result');
+        }, 2500); // Fake processing time for effect
     }
   };
 
+  const calculateResult = (answers: QuizOption[]) => {
+      if (!selectedGoddess) return;
+
+      // Logic: Find most frequent affinity
+      const tally: Record<string, number> = {};
+      answers.forEach(a => {
+          tally[a.affinityPoints] = (tally[a.affinityPoints] || 0) + 1;
+      });
+
+      // Sort factions by count
+      const sortedFactions = Object.entries(tally).sort((a, b) => b[1] - a[1]);
+      const topFactionId = sortedFactions[0][0];
+      const matchedRegion = REGIONS.find(r => r.id === topFactionId);
+
+      // Creative flavor text generation based on traits
+      const traits = answers.map(a => a.trait).join(", ");
+      
+      let title = "알 수 없는 운명";
+      let desc = "당신의 운명은 흐릿합니다.";
+      let color = "무색";
+      let potential = "잠재력";
+
+      // Simple mapping logic for flavor (can be expanded)
+      if (topFactionId === 'demon' || topFactionId === 'drameth') {
+          title = "심연을 걷는 패왕";
+          desc = "당신은 힘과 지배를 통해 세상을 바꾸려 합니다. 고독하지만 강력한 길입니다.";
+          color = "검붉은색";
+          potential = "압도적인 무력";
+      } else if (topFactionId === 'elysium' || topFactionId === 'elianos') {
+          title = "빛을 품은 성자";
+          desc = "당신은 타인을 위하고 평화를 사랑하는 고결한 영혼을 가졌습니다.";
+          color = "순백색";
+          potential = "치유와 정화";
+      } else if (topFactionId === 'libertas' || topFactionId === 'ernia') {
+          title = "자유로운 바람의 방랑자";
+          desc = "어디에도 얽매이지 않는 자유로운 영혼입니다. 모험이 당신을 부르고 있습니다.";
+          color = "에메랄드빛";
+          potential = "무한한 적응력";
+      } else if (topFactionId === 'aclay' || topFactionId === 'dwarf') {
+          title = "진리를 탐구하는 현자";
+          desc = "감정보다는 이성과 논리를 중시하며, 세상의 이치를 깨닫고자 합니다.";
+          color = "푸른색";
+          potential = "지식과 마법";
+      } else if (topFactionId === 'atlantis' || topFactionId === 'inn') {
+          title = "경계를 넘는 이단아";
+          desc = "남들과는 다른 시선으로 세상을 봅니다. 혼돈 속에서 새로운 질서를 찾습니다.";
+          color = "보랏빛";
+          potential = "창조적 파괴";
+      } else if (topFactionId === 'belsarion') {
+          title = "철의 규율을 지키는 기사";
+          desc = "명예와 질서를 중시하며, 흔들리지 않는 신념을 가지고 있습니다.";
+          color = "황금색";
+          potential = "통솔력";
+      }
+
+      setFinalResult({
+          type: 'result',
+          fateTitle: title,
+          fateDescription: desc,
+          affinity: matchedRegion ? matchedRegion.name : "방랑자",
+          soulColor: color,
+          potential: potential,
+          emotion: 5
+      });
+  };
+
   const handleReset = () => {
-    // This fully resets the component state to the "Selection" mode
     setSelectedGoddessId(null);
     setFinalResult(null);
-    setUserInput('');
+    setUserAnswers([]);
     setStep('intro');
-    setHistory([]);
   };
 
   // Image URL Generators
@@ -226,7 +226,7 @@ export const OracleSection: React.FC = () => {
 
                {/* Full Size Character Portrait */}
                <img 
-                 src={getCharUrl(selectedGoddess.imageCode, currentEmotion)} 
+                 src={getCharUrl(selectedGoddess.imageCode, step === 'result' ? 5 : 1)} 
                  alt={selectedGoddess.name} 
                  className={`
                    absolute inset-0 w-full h-full object-cover transition-all duration-700 z-10
@@ -261,34 +261,34 @@ export const OracleSection: React.FC = () => {
                  </div>
                  {step === 'answering' && (
                     <div className="text-gray-400 font-serif text-sm pb-1 tracking-widest animate-pulse">
-                        질문 {currentTurn} / 3
+                        질문 {currentQuestionIndex + 1} / {selectedGoddess.quiz.length}
                     </div>
                  )}
               </div>
 
               {/* Main Dialogue Box */}
-              <div className="w-full border-t border-white/10 bg-black/40 backdrop-blur-md p-4 md:p-8 min-h-[150px] md:min-h-[180px] flex flex-col justify-center relative shadow-lg">
+              <div className="w-full border-t border-white/10 bg-black/40 backdrop-blur-md p-4 md:p-8 min-h-[150px] md:min-h-[220px] flex flex-col justify-center relative shadow-lg">
                 
                 {loading ? (
                     <div className="flex items-center gap-3 text-reise-gold animate-pulse">
                         <Sparkles className="w-5 h-5 animate-spin" />
                         <span className="font-serif text-lg transition-all duration-500 min-w-[200px]">
                            {/* Dynamic Loading Message */}
-                           {currentTurn > 2 ? LOADING_MESSAGES[loadingMsgIndex] : "당신의 답을 듣고 있습니다..."}
+                           {LOADING_MESSAGES[loadingMsgIndex]}
                         </span>
                     </div>
                 ) : (
                     <>
                         {step === 'intro' && (
-                            <div className="animate-fade-in">
-                                <p className="text-xl md:text-2xl text-white font-serif leading-relaxed drop-shadow-lg mb-6">
-                                    "{currentQuestion}"
+                            <div className="animate-fade-in space-y-6">
+                                <p className="text-xl md:text-2xl text-white font-serif leading-relaxed drop-shadow-lg">
+                                    "내게 운명을 묻고자 왔느냐? 좋아, 너의 영혼을 시험해보도록 하지."
                                 </p>
                                 <button 
-                                    onClick={handleStartAnswering}
-                                    className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded-full text-white font-serif text-sm md:text-base transition-all flex items-center gap-2"
+                                    onClick={handleStartQuiz}
+                                    className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/30 hover:border-white rounded-sm text-white font-serif text-sm md:text-base transition-all flex items-center gap-2 group"
                                 >
-                                    <MessageCircle className="w-4 h-4" /> 심판 시작하기
+                                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" /> 심판 시작하기
                                 </button>
                             </div>
                         )}
@@ -296,26 +296,19 @@ export const OracleSection: React.FC = () => {
                         {step === 'answering' && (
                             <div className="w-full animate-fade-in">
                                 <p className="text-lg md:text-2xl text-white font-serif leading-relaxed drop-shadow-lg mb-6">
-                                    "{currentQuestion}"
+                                    "{selectedGoddess.quiz[currentQuestionIndex].text}"
                                 </p>
-                                <div className="flex gap-2">
-                                    <input 
-                                        ref={inputRef}
-                                        type="text"
-                                        value={userInput}
-                                        onChange={(e) => setUserInput(e.target.value)}
-                                        onKeyDown={(e) => e.key === 'Enter' && handleSubmitAnswer()}
-                                        placeholder="답변을 입력하세요..."
-                                        className="flex-1 bg-transparent border-b border-white/30 py-2 text-xl text-white font-serif focus:outline-none focus:border-reise-gold placeholder:text-gray-600 transition-colors"
-                                        autoComplete="off"
-                                    />
-                                    <button 
-                                        onClick={handleSubmitAnswer}
-                                        disabled={!userInput.trim()}
-                                        className="p-3 text-reise-gold hover:text-white disabled:opacity-30 transition-colors"
-                                    >
-                                        <Send className="w-6 h-6" />
-                                    </button>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {selectedGoddess.quiz[currentQuestionIndex].options.map((option, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => handleOptionSelect(option)}
+                                            className="px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-reise-gold/60 text-left text-sm md:text-base text-gray-200 hover:text-white transition-all duration-300 font-serif rounded-sm active:scale-95"
+                                        >
+                                            <span className="text-reise-gold mr-2 font-bold">{String.fromCharCode(65 + idx)}.</span>
+                                            {option.text}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                         )}
@@ -326,7 +319,7 @@ export const OracleSection: React.FC = () => {
                                     <div className="flex-1 space-y-4">
                                         <div>
                                             <span className="text-xs text-gray-400 uppercase tracking-[0.2em]">운명의 판결</span>
-                                            <h3 className="text-3xl md:text-4xl text-reise-gold font-serif font-bold mt-1 text-glow">
+                                            <h3 className="text-3xl md:text-4xl text-reise-gold font-serif font-bold mt-1 text-glow animate-pulse">
                                                 {finalResult.fateTitle}
                                             </h3>
                                         </div>

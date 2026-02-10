@@ -17,10 +17,55 @@ export const GODDESSES: Goddess[] = [
     borderColor: 'border-red-900/50',
     shadowColor: 'shadow-red-900/40',
     textColor: 'text-red-200',
-    initialQuestions: [
-      "하, 또 길 잃은 벌레가 기어들어왔군. 네놈은 자신의 '가치'가 무엇이라 생각해서 감히 내 앞에 선 것이냐?",
-      "세상은 힘 없는 자의 비명 따위 기억하지 않는다. 네놈은 짓밟히는 쪽인가, 아니면 짓밟고 올라서는 쪽인가?",
-      "모든 것을 잃고도 지키고 싶은 신념 따위가 네게 남아있느냐? 그게 네 목숨보다 가치 있다고 증명해 봐라."
+    quiz: [
+      {
+        text: "하, 또 길 잃은 벌레가 기어들어왔군. 네놈은 자신의 '가치'가 무엇이라 생각해서 감히 내 앞에 선 것이냐?",
+        options: [
+          { text: "나의 가치는 압도적인 '힘'에 있다.", affinityPoints: 'demon', trait: 'Power' },
+          { text: "어떤 상황에서도 꺾이지 않는 '의지'다.", affinityPoints: 'belsarion', trait: 'Will' },
+          { text: "가치? 그런 건 살다 보면 증명되는 것이다.", affinityPoints: 'libertas', trait: 'Freedom' }
+        ]
+      },
+      {
+        text: "세상은 힘 없는 자의 비명 따위 기억하지 않는다. 눈앞에 짓밟히는 약자가 있다면 어떻게 할 테냐?",
+        options: [
+          { text: "약한 것은 죄다. 무시하고 지나간다.", affinityPoints: 'drameth', trait: 'Cold' },
+          { text: "그들을 지배하여 나의 병사로 삼는다.", affinityPoints: 'demon', trait: 'Domination' },
+          { text: "구해준다. 나중에 이용할 가치가 있을지 모르니.", affinityPoints: 'ernia', trait: 'Calculation' }
+        ]
+      },
+      {
+        text: "마지막이다. 만약 네가 모든 것을 잃고 홀로 남는다면, 그때 너를 지탱하는 것은 무엇이지?",
+        options: [
+          { text: "세상을 향한 뜨거운 '복수심'.", affinityPoints: 'rest', trait: 'Revenge' },
+          { text: "다시 일어설 수 있다는 '오만함'.", affinityPoints: 'demon', trait: 'Pride' },
+          { text: "잃을 것이 없다는 '자유'.", affinityPoints: 'inn', trait: 'Void' }
+        ]
+      },
+      {
+        text: "믿었던 자가 네 등에 칼을 꽂는다면, 그 순간 네가 할 생각은 무엇이냐?",
+        options: [
+          { text: "즉시 그 자리에서 처형한다.", affinityPoints: 'drameth', trait: 'Ruthless' },
+          { text: "이용 가치가 다했군. 예상했던 바다.", affinityPoints: 'aclay', trait: 'Logic' },
+          { text: "감히 나를? 분노로 모든 것을 불태운다.", affinityPoints: 'demon', trait: 'Wrath' }
+        ]
+      },
+      {
+        text: "거대한 벽이 네 앞길을 막고 있다. 돌아갈 길은 없어. 어떻게 하겠느냐?",
+        options: [
+          { text: "벽을 부수고 짓밟으며 나아간다.", affinityPoints: 'demon', trait: 'Destruction' },
+          { text: "벽의 구조를 파악해 약점을 찌른다.", affinityPoints: 'belsarion', trait: 'Strategy' },
+          { text: "벽을 넘을 도구를 만들거나 찾는다.", affinityPoints: 'dwarf', trait: 'Resourcefulness' }
+        ]
+      },
+      {
+        text: "만약 신조차 죽일 수 있는 힘이 네 손에 들어온다면, 그걸로 무엇을 할 테냐?",
+        options: [
+          { text: "세상을 내 뜻대로 다시 쓴다.", affinityPoints: 'demon', trait: 'Ambition' },
+          { text: "운명과 굴레를 부수고 해방된다.", affinityPoints: 'libertas', trait: 'Liberation' },
+          { text: "그저 조용히, 깊은 잠에 들고 싶군.", affinityPoints: 'rest', trait: 'Silence' }
+        ]
+      }
     ]
   },
   {
@@ -39,10 +84,55 @@ export const GODDESSES: Goddess[] = [
     borderColor: 'border-blue-400/50',
     shadowColor: 'shadow-blue-400/40',
     textColor: 'text-blue-200',
-    initialQuestions: [
-      "어머, 새로운 여행자님이다! 반가워요~ 저기, 만약 오늘 밤하늘에서 별 하나를 따올 수 있다면 누구에게 선물하고 싶어?",
-      "짜잔! 제가 마법을 걸어서 당신을 세상에서 가장 행복한 사람으로 만들어준다면, 그건 어떤 모습일까요?",
-      "여행자님은 험난한 모험 속에서도 '이것만큼은 절대 포기 못 해!' 하는 낭만이 있나요? 저한테만 살짝 말해줘요!"
+    quiz: [
+      {
+        text: "어머, 반가워요! 저기, 만약 오늘 밤하늘에서 별 하나를 따올 수 있다면 누구에게 선물하고 싶어?",
+        options: [
+          { text: "가장 사랑하는 사람에게 줄 거야.", affinityPoints: 'elysium', trait: 'Love' },
+          { text: "고생하는 나 자신에게 선물할래!", affinityPoints: 'aclay', trait: 'Self' },
+          { text: "세상 모든 사람들에게 빛을 나눠줄래.", affinityPoints: 'elianos', trait: 'Altruism' }
+        ]
+      },
+      {
+        text: "짜잔! 제가 마법을 걸어서 당신을 세상에서 가장 행복한 사람으로 만들어준다면, 그건 어떤 모습일까요?",
+        options: [
+          { text: "모두가 평화롭게 웃고 있는 세상.", affinityPoints: 'elianos', trait: 'Peace' },
+          { text: "미지의 세계를 끝없이 여행하는 모습.", affinityPoints: 'libertas', trait: 'Adventure' },
+          { text: "아무 걱정 없이 늘어지게 자는 모습.", affinityPoints: 'dwarf', trait: 'Comfort' }
+        ]
+      },
+      {
+        text: "여행자님은 험난한 모험 속에서도 '이것만큼은 절대 포기 못 해!' 하는 낭만이 있나요?",
+        options: [
+          { text: "동료와의 끈끈한 '우정'.", affinityPoints: 'ernia', trait: 'Friendship' },
+          { text: "언젠가 전설이 될 나의 '명예'.", affinityPoints: 'belsarion', trait: 'Honor' },
+          { text: "맛있는 음식과 따뜻한 잠자리!", affinityPoints: 'inn', trait: 'Joy' }
+        ]
+      },
+      {
+        text: "비가 추적추적 내리는 날이네요. 이런 날엔 뭘 하고 싶으세요?",
+        options: [
+          { text: "빗소리를 들으며 따뜻한 차 한 잔.", affinityPoints: 'inn', trait: 'Relaxation' },
+          { text: "빗속에서 춤을 추거나 산책하기!", affinityPoints: 'elysium', trait: 'Whimsy' },
+          { text: "도서관에서 조용히 마법책 읽기.", affinityPoints: 'aclay', trait: 'Study' }
+        ]
+      },
+      {
+        text: "숲길을 걷다가 다친 작은 동물을 발견했어요! 어떡하죠?",
+        options: [
+          { text: "치료 마법으로 낫게 해준다.", affinityPoints: 'elianos', trait: 'Kindness' },
+          { text: "데려가서 내 친구로 삼는다!", affinityPoints: 'ernia', trait: 'Bond' },
+          { text: "상태를 관찰하고 기록한다.", affinityPoints: 'dwarf', trait: 'Observation' }
+        ]
+      },
+      {
+        text: "마지막 질문! 먼 훗날, 당신이 전설이 된다면 어떤 이야기로 기억되고 싶나요?",
+        options: [
+          { text: "세상을 구한 위대한 영웅.", affinityPoints: 'belsarion', trait: 'Legacy' },
+          { text: "바람처럼 자유로웠던 방랑자.", affinityPoints: 'libertas', trait: 'Freedom' },
+          { text: "보는 사람마다 미소 짓게 했던 사람.", affinityPoints: 'elysium', trait: 'Warmth' }
+        ]
+      }
     ]
   },
   {
@@ -61,10 +151,55 @@ export const GODDESSES: Goddess[] = [
     borderColor: 'border-indigo-400/50',
     shadowColor: 'shadow-indigo-400/40',
     textColor: 'text-indigo-200',
-    initialQuestions: [
-      "삐빅. 개체 식별 코드 확인 불가. 너는 이 시뮬레이션 우주에서 '주인공' 역할을 맡고 싶어, 아니면 '버그'가 되고 싶어?",
-      "저기, 네 데이터 베이스를 스캔해봐도 돼? 너희 인간들은 왜 효율적인 '정답' 대신 비효율적인 '감정'을 선택하는 거야?",
-      "이 세계의 텍스처가 가끔 깨져 보이지 않아? 만약 이 세상이 누군가의 꿈이라면, 너는 언제 깨어나고 싶어?"
+    quiz: [
+      {
+        text: "삐빅. 개체 식별 코드 확인 불가. 너는 이 시뮬레이션 우주에서 '주인공' 역할을 맡고 싶어, 아니면 '버그'가 되고 싶어?",
+        options: [
+          { text: "모두가 우러러보는 주인공이 될래.", affinityPoints: 'belsarion', trait: 'Protagonist' },
+          { text: "시스템을 붕괴시키는 치명적인 버그.", affinityPoints: 'atlantis', trait: 'Chaos' },
+          { text: "그냥 지나가는 배경 NPC 1.", affinityPoints: 'dwarf', trait: 'Observer' }
+        ]
+      },
+      {
+        text: "저기, 네 데이터 베이스를 스캔해봐도 돼? 너희 인간들은 왜 효율적인 '정답' 대신 비효율적인 '감정'을 선택하는 거야?",
+        options: [
+          { text: "감정이야말로 예측 불가능한 힘이니까.", affinityPoints: 'elysium', trait: 'Emotion' },
+          { text: "나는 효율적인 정답을 선택하는데?", affinityPoints: 'aclay', trait: 'Logic' },
+          { text: "재미있잖아! 비효율이 낭만이라고.", affinityPoints: 'libertas', trait: 'Fun' }
+        ]
+      },
+      {
+        text: "이 세계의 텍스처가 가끔 깨져 보이지 않아? 만약 이 세상이 누군가의 꿈이라면, 너는 언제 깨어나고 싶어?",
+        options: [
+          { text: "꿈이라도 상관없어. 끝까지 즐길 거야.", affinityPoints: 'libertas', trait: 'Present' },
+          { text: "진실을 알 수 있다면 지금 당장.", affinityPoints: 'atlantis', trait: 'Truth' },
+          { text: "영원히 깨지 않는 꿈속에 숨을래.", affinityPoints: 'rest', trait: 'Escape' }
+        ]
+      },
+      {
+        text: "치명적인 '벽 뚫기' 버그를 발견했다! 운영자는 자고 있어. 어떻게 할래?",
+        options: [
+          { text: "버그를 악용해 맵 밖의 미지로 떠난다.", affinityPoints: 'libertas', trait: 'Exploration' },
+          { text: "운영자에게 즉시 신고한다.", affinityPoints: 'belsarion', trait: 'Order' },
+          { text: "최단 기록 스피드런에 사용한다.", affinityPoints: 'atlantis', trait: 'Efficiency' }
+        ]
+      },
+      {
+        text: "정체불명의 데이터 조각이 떨어져 있어. 먹으면 강해질지도 몰라.",
+        options: [
+          { text: "일단 분석해서 성분을 파악한다.", affinityPoints: 'aclay', trait: 'Analysis' },
+          { text: "냠! 먹어서 힘을 흡수한다.", affinityPoints: 'demon', trait: 'Greed' },
+          { text: "비싸게 팔 수 있을까? 챙겨둔다.", affinityPoints: 'inn', trait: 'Merchant' }
+        ]
+      },
+      {
+        text: "만약 네가 이 세계의 장르를 마음대로 바꿀 수 있다면?",
+        options: [
+          { text: "두근두근 미연시 (연애 시뮬레이션).", affinityPoints: 'inn', trait: 'Romance' },
+          { text: "다 때려 부수는 핵 앤 슬래시.", affinityPoints: 'demon', trait: 'Action' },
+          { text: "평화로운 농장 경영 타이쿤.", affinityPoints: 'dwarf', trait: 'Management' }
+        ]
+      }
     ]
   }
 ];

@@ -33,6 +33,17 @@ export interface OracleResponse {
   potential?: string;     // e.g. "마법 친화력 최상", "검술 재능 없음"
 }
 
+export interface QuizOption {
+  text: string;
+  affinityPoints: string; // The faction ID this option favors
+  trait: string; // e.g. "Cold", "Kind", "Chaotic"
+}
+
+export interface QuizQuestion {
+  text: string;
+  options: QuizOption[];
+}
+
 export interface Region {
   id: string;
   name: string;
@@ -73,5 +84,6 @@ export interface Goddess {
   borderColor: string;
   shadowColor: string;
   textColor: string;
-  initialQuestions: string[]; // Changed from single string to array
+  // Replaced initialQuestions with structured quiz data
+  quiz: QuizQuestion[];
 }
