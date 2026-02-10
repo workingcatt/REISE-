@@ -219,37 +219,38 @@ export const OracleSection: React.FC = () => {
         {selectedGoddess && (
           <div id="oracle-interface" className="w-full max-w-6xl mx-auto h-[80vh] min-h-[600px] flex flex-col animate-fade-in-up relative bg-black rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
             
-            {/* 1. Scene Layer (Background + Character) */}
-            <div className="relative flex-1 w-full h-full overflow-hidden bg-[#0a0a0c]">
-               <div className="absolute inset-0 z-0 bg-gradient-to-b from-gray-900 via-black to-black"></div>
+            {/* 1. Scene Layer (Full Background Character) */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0c]">
+               {/* Background Gradient */}
+               <div className="absolute inset-0 z-0 bg-gradient-to-b from-gray-900 via-black to-black opacity-50"></div>
 
-               {/* Character Sprite */}
-               <div className="absolute inset-0 z-10 flex items-end justify-center pointer-events-none transition-all duration-500">
-                  <img 
-                    src={getCharUrl(selectedGoddess.imageCode, currentEmotion)} 
-                    alt={selectedGoddess.name} 
-                    className={`
-                      object-contain drop-shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-fade-in-up transition-all duration-500
-                      ${selectedGoddess.id === 'risare' 
-                        ? 'h-[85%] md:h-[105%] translate-y-2 md:translate-y-12' 
-                        : 'h-[80%] md:h-[95%] translate-y-0 md:translate-y-8'
-                      }
-                    `}
-                  />
-               </div>
+               {/* Full Size Character Portrait */}
+               <img 
+                 src={getCharUrl(selectedGoddess.imageCode, currentEmotion)} 
+                 alt={selectedGoddess.name} 
+                 className={`
+                   absolute inset-0 w-full h-full object-cover transition-all duration-700 z-10
+                   ${selectedGoddess.id === 'risare' ? 'object-[65%_0%]' : 'object-top'}
+                 `}
+               />
+               
+               {/* Overlay to ensure text readability at bottom */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-20"></div>
+               {/* Top darkening for Close button visibility */}
+               <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/80 to-transparent z-20"></div>
             </div>
 
-            {/* Top Close Button */}
+            {/* Top Close Button - Repositioned comfortably */}
             <button 
                 onClick={handleReset} 
-                className="absolute top-4 right-4 z-50 p-2 text-white/50 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all"
+                className="absolute top-6 right-6 z-50 p-2 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 rounded-full transition-all border border-white/10 backdrop-blur-md"
             >
                 <XCircle className="w-8 h-8" />
             </button>
 
 
             {/* 2. Cinematic UI Layer (Bottom Overlay) */}
-            <div className="absolute bottom-0 left-0 right-0 z-30 flex flex-col justify-end pt-32 pb-8 md:pb-12 px-4 md:px-20 bg-gradient-to-t from-black via-black/90 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 z-30 flex flex-col justify-end pt-32 pb-8 md:pb-12 px-4 md:px-20">
               
               {/* Name Label & Progress */}
               <div className="flex items-end gap-4 mb-2">
@@ -266,7 +267,7 @@ export const OracleSection: React.FC = () => {
               </div>
 
               {/* Main Dialogue Box */}
-              <div className="w-full border-t border-white/10 bg-black/40 backdrop-blur-sm p-4 md:p-8 min-h-[150px] md:min-h-[180px] flex flex-col justify-center relative">
+              <div className="w-full border-t border-white/10 bg-black/40 backdrop-blur-md p-4 md:p-8 min-h-[150px] md:min-h-[180px] flex flex-col justify-center relative shadow-lg">
                 
                 {loading ? (
                     <div className="flex items-center gap-3 text-reise-gold animate-pulse">
