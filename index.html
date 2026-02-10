@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reise - 여명의 시작</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;800&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #020410;
+        color: #e2e8f0;
+        font-family: 'Noto Serif KR', 'Cormorant Garamond', serif;
+      }
+      h1, h2, h3, h4, h5, h6, .cinzel {
+        font-family: 'Cinzel', serif;
+      }
+      .cinzel-decorative {
+        font-family: 'Cinzel Decorative', serif;
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b101b; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4c1d95; 
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7c3aed;
+      }
+
+      /* Refined Animations */
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; transform: scale(0.9); }
+        50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+      }
+
+      /* Natural Shooting Star Animation */
+      @keyframes shooting-star-fall {
+        0% {
+          transform: translate3d(0, 0, 0) rotate(-45deg) scale(0.8);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate3d(-100vh, 100vh, 0) rotate(-45deg) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .animate-fade-in-up {
+        animation: fade-in-up 1s ease-out forwards;
+      }
+      
+      .text-glow {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .delay-100 { animation-delay: 100ms; }
+      .delay-200 { animation-delay: 200ms; }
+      .delay-500 { animation-delay: 500ms; }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              reise: {
+                bg: '#020410',      /* Deepest Obsidian Blue */
+                primary: '#e0e7ff', /* Ice White/Blue */
+                secondary: '#6366f1', /* Electric Indigo */
+                accent: '#a78bfa',  /* Soft Purple */
+                gold: '#fbbf24',    /* Amber Gold (Stars) */
+                twilight: '#701a75', /* Deep Magenta/Purple (Twilight) */
+                dawn: '#f472b6',    /* Soft Pink/Rose (Twilight Horizon) */
+                glass: 'rgba(15, 23, 42, 0.6)'
+              }
+            },
+            fontFamily: {
+              sans: ['Noto Serif KR', 'serif'],
+              display: ['Cinzel', 'serif'],
+            },
+            letterSpacing: {
+              'widest-xl': '0.3em',
+            },
+            backgroundImage: {
+              'galaxy-gradient': 'linear-gradient(to bottom, #020617, #1e1b4b, #312e81)',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
