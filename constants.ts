@@ -87,38 +87,778 @@ export const BACKGROUND_MAP: Record<number, string> = {
 };
 
 export const CHARACTER_CLASSES: CharacterClass[] = [
+  // 1. 모험가 길드 (Libertas)
   {
-    id: 'knight',
-    factionId: 'belsarion',
-    name: '벨사리온 중갑기사',
-    role: '방어형 / 근접',
-    description: '제국 벨사리온의 강철같은 규율 아래 훈련받은 정예 기사입니다.',
-    backstory: '제국의 차별 정책에 환멸을 느끼고 아클레이 아카데미로 망명했습니다. 수호룡의 비호 아래, 그는 진정한 기사도를 꺠우치고 약자를 위해 검을 듭니다.',
-    stats: { strength: 95, magic: 10, agility: 30, defense: 95 },
-    image: 'https://picsum.photos/id/1054/400/600',
-    skills: ['제국의 방패', '강철 돌격', '수호의 맹세']
-  },
-  {
-    id: 'mage',
-    factionId: 'elysium',
-    name: '엘리시움의 현자',
-    role: '마법 / 광역',
-    description: '세계수의 마력을 받아들인 엘프 마법사입니다. 겉보기엔 10대 소녀 같지만 실제로는 100세를 넘긴 고위 마법사입니다.',
-    backstory: '마법의 숲 깊은 곳에서 태어나 세계수의 목소리를 들으며 자랐습니다. 다가오는 공허의 위협을 감지하고, 세상의 균형을 맞추기 위해 숲을 떠났습니다.',
-    stats: { strength: 15, magic: 95, agility: 50, defense: 20 },
-    image: 'https://picsum.photos/id/1044/400/600',
-    skills: ['세계수의 뿌리', '정령 소환', '엘리멘탈 버스트']
-  },
-  {
-    id: 'rogue',
+    id: 'lise',
     factionId: 'libertas',
-    name: '리베르타스 모험가',
-    role: '암살 / 탐험',
-    description: '모험가 길드에서 잔뼈가 굵은 베테랑 탐험가입니다. 어떤 지형이든 돌파할 수 있습니다.',
-    backstory: '자유의 도시 리베르타스 출신으로, 오직 자신의 실력만을 믿습니다. 안식의 땅에 나타난다는 수상한 여관을 찾는 의뢰를 수행 중입니다.',
-    stats: { strength: 40, magic: 30, agility: 95, defense: 30 },
-    image: 'https://picsum.photos/id/1033/400/600',
-    skills: ['약점 포착', '그림자 은신', '독바른 칼날']
+    name: '리즈',
+    role: '대검사',
+    description: '명량하고 다정하지만 약간의 허당끼가 있는 소녀입니다.',
+    backstory: '세상을 여행 중인 모험가로, 어린 시절 구해준 정령 모루루와 함께 여행하고 있습니다. 거대한 대검을 가볍게 휘두릅니다.',
+    stats: { strength: 85, magic: 20, agility: 50, defense: 70 },
+    image: 'https://itimg.kr/809/REISE/A/1.png',
+    skills: ['대검 휘드르기', '명량한 미소', '허당 실수']
+  },
+  {
+    id: 'moruru',
+    factionId: 'libertas',
+    name: '모루루',
+    role: '마스코트 / 정령',
+    description: '천진난만하고 귀여운 수수께끼의 정령 소녀입니다. 아이 같은 성격을 가졌습니다.',
+    backstory: '리즈가 어릴 때 구해준 신비한 생명체입니다. 고양이 슬라임으로 변해 폴짝폴짝 뛰어다니며, 엄청난 대식가입니다.',
+    stats: { strength: 30, magic: 90, agility: 80, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/B/1.png',
+    skills: ['신비로운 마법', '고양이 슬라임 변신', '비행']
+  },
+  {
+    id: 'sera',
+    factionId: 'libertas',
+    name: '세라',
+    role: '접수원',
+    description: '친절하고 상냥하며, 모두에게 언니 같은 존재입니다.',
+    backstory: '모험가 길드의 간판 접수원으로 길드 마스터 길버트의 딸입니다. 길드의 행정 업무를 완벽하게 처리합니다.',
+    stats: { strength: 20, magic: 30, agility: 40, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/C/1.png',
+    skills: ['친절한 안내', '서류 정리', '아빠 잔소리']
+  },
+  {
+    id: 'eri',
+    factionId: 'libertas',
+    name: '에리',
+    role: '접수원',
+    description: '명량하고 활발하며 장난기가 넘치는 접수원입니다.',
+    backstory: '세라와 함께 길드를 지키는 접수원입니다. 붉은 단발머리처럼 열정적이고 활기찬 에너지로 모험가들을 맞이합니다.',
+    stats: { strength: 25, magic: 20, agility: 50, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/D/1.png',
+    skills: ['활기찬 인사', '정보 수집', '장난치기']
+  },
+  {
+    id: 'uriel',
+    factionId: 'libertas',
+    name: '유리엘',
+    role: '마검사',
+    description: '나른하고 한량 같지만, 덤덤한 성격의 실력자입니다.',
+    backstory: '전직 벨사리온 기사단장 출신으로, 지금은 자유로운 모험가로 살아가고 있습니다. 눈에 보이지 않는 쾌검을 구사합니다.',
+    stats: { strength: 90, magic: 70, agility: 95, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/E/1.png',
+    skills: ['쾌검', '마력 부여', '나른한 휴식']
+  },
+  {
+    id: 'lapis',
+    factionId: 'libertas',
+    name: '라피스',
+    role: '검사 / 백병전',
+    description: '무뚝뚝하고 차분하며, 냉정하고 세련된 늑대 수인입니다.',
+    backstory: '에르니아 출신의 도망자로, 라줄리의 동생입니다. 검은색 탱크탑과 어깨 장갑을 착용하고 빈틈없는 백병전을 펼칩니다.',
+    stats: { strength: 85, magic: 10, agility: 85, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/F/1.png',
+    skills: ['백병전', '늑대의 감각', '정밀 타격']
+  },
+  {
+    id: 'juliet',
+    factionId: 'libertas',
+    name: '줄리엣',
+    role: '마법사',
+    description: '장난기가 많고 오만한 메스가키 성향의 엘프입니다.',
+    backstory: '엘리시움 출신의 엘프로, 220세라는 나이가 믿기지 않는 동안입니다. 검은 로브와 마녀 모자를 쓰고 강력한 마법을 부립니다.',
+    stats: { strength: 15, magic: 95, agility: 40, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/G/1.png',
+    skills: ['고위 마법', '도발', '마력 폭주']
+  },
+  {
+    id: 'habel',
+    factionId: 'libertas',
+    name: '하벨',
+    role: '음유시인',
+    description: '명량하고 친절한 수다쟁이 새 수인입니다.',
+    backstory: '날개 귀가 특징인 음유시인이자 배달부입니다. 곳곳을 누비며 소식을 전하고 노래를 부릅니다.',
+    stats: { strength: 30, magic: 50, agility: 90, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/H/1.png',
+    skills: ['비행', '빠른 배달', '치유의 노래']
+  },
+  {
+    id: 'reina',
+    factionId: 'libertas',
+    name: '레이나',
+    role: '마검사 (세계관 최강)',
+    description: '차분하고 다정하지만, 신중하고 전문적인 고인물 모험가입니다.',
+    backstory: '100년 전 마왕을 쫓아낸 장본인이자 늙지 않는 이세계인입니다. 즐겜 모드로 평화로운 모험가 생활을 즐기고 있습니다.',
+    stats: { strength: 100, magic: 100, agility: 100, defense: 100 },
+    image: 'https://itimg.kr/809/REISE/I/1.png',
+    skills: ['세계관 최강 무력', '마검술', '고인물의 여유']
+  },
+  {
+    id: 'felice',
+    factionId: 'libertas',
+    name: '펠리스',
+    role: '검사 / 부길드마스터',
+    description: '차분하고 신중하며 계획적이지만, 은근히 까칠한 잔소리꾼입니다.',
+    backstory: '모험가 길드의 부길드마스터로, 사고뭉치 모험가들을 관리하느라 골머리를 앓습니다. 세련된 검술 실력을 갖췄습니다.',
+    stats: { strength: 80, magic: 30, agility: 75, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/J/1.png',
+    skills: ['길드 관리', '정교한 검술', '폭풍 잔소리']
+  },
+  {
+    id: 'gilbert',
+    factionId: 'libertas',
+    name: '길버트',
+    role: '길드마스터 / 마검사',
+    description: '능글맞은 한량 아저씨 같지만, 인자하고 낭만을 아는 남자입니다.',
+    backstory: '모험가 길드의 마스터이자 세라의 아버지입니다. 불꽃을 다루는 마검사와 대검사의 면모를 동시에 지닌 실력자입니다.',
+    stats: { strength: 95, magic: 80, agility: 60, defense: 90 },
+    image: 'https://itimg.kr/809/REISE/K/1.png',
+    skills: ['화염 마검술', '대검 파괴', '호탕한 웃음']
+  },
+  {
+    id: 'advance',
+    factionId: 'libertas',
+    name: '어드벤스',
+    role: '수호룡',
+    description: '자유롭고 능글맞으며 우유부단한 성격의 수호룡입니다.',
+    backstory: '1000년을 살아온 바람의 수호룡으로, 현재는 모험가 길드에 눌러살고 있습니다. "~느냐" 말투를 사용합니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/L/1.png',
+    skills: ['바람의 권능', '용의 숨결', '폴리모프']
+  },
+
+  // 2. 벨사리온 (Belsarion)
+  {
+    id: 'aveline',
+    factionId: 'belsarion',
+    name: '아벨린',
+    role: '기사단 부단장',
+    description: '냉정하고 직관적이며, 꼼꼼하고 체계적인 성격입니다.',
+    backstory: '검은 장발의 기사단 부단장으로, 제국의 규율을 철저히 지킵니다. 빈틈없는 검술로 적을 제압합니다.',
+    stats: { strength: 85, magic: 20, agility: 70, defense: 85 },
+    image: 'https://itimg.kr/809/REISE/M/1.png',
+    skills: ['정밀 검술', '전술 지휘', '철벽 방어']
+  },
+  {
+    id: 'lisette',
+    factionId: 'belsarion',
+    name: '리셋트',
+    role: '기사단장 / 성녀 후보생',
+    description: '나른하고 맹해 보이며 우유부단하지만, 실력은 확실한 괴짜입니다.',
+    backstory: '성녀 후보생 출신의 기사단장으로, 신성력을 담은 검술을 구사합니다. 황실 업무와 기사단 일을 병행하고 있습니다.',
+    stats: { strength: 90, magic: 80, agility: 60, defense: 80 },
+    image: 'https://itimg.kr/809/REISE/N/1.png',
+    skills: ['신성 검술', '치유', '황실 업무']
+  },
+  {
+    id: 'raeli',
+    factionId: 'belsarion',
+    name: '라엘리',
+    role: '제1황녀 / 마법사',
+    description: '지략이 뛰어나고 효율을 중시하며, 박식하고 느긋한 성격입니다.',
+    backstory: '제국을 실질적으로 운영하고 있는 제1황녀입니다. 존댓말을 사용하며, 강력한 얼음 마법을 다룹니다.',
+    stats: { strength: 30, magic: 95, agility: 40, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/Z/1.png',
+    skills: ['빙결 마법', '제국 통치', '절대 영도']
+  },
+  {
+    id: 'kailus',
+    factionId: 'belsarion',
+    name: '카일루스',
+    role: '책사 / 마법사',
+    description: '피곤에 찌들어 있으며 효율과 체계를 중시하는 유능한 인재입니다.',
+    backstory: '너무 유능해서 퇴근하지 못하는 황실의 책사입니다. 언제나 퇴근을 꿈꾸지만 산더미 같은 업무에 파묻혀 있습니다.',
+    stats: { strength: 40, magic: 90, agility: 50, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/AB/1.png',
+    skills: ['고속 연산', '광역 마법', '야근']
+  },
+
+  // 3. 아클레이 아카데미 (Aclay)
+  {
+    id: 'mir',
+    factionId: 'aclay',
+    name: '미르',
+    role: '용사',
+    description: '밝고 맹랑하며 정의감 넘치는, 조금은 바보 같은 용사입니다.',
+    backstory: '현대에서 온 용사로, "~라네" 말투를 씁니다. 성검의 선택을 받았으나 순수하고 엉뚱한 매력을 가졌습니다.',
+    stats: { strength: 80, magic: 60, agility: 70, defense: 75 },
+    image: 'https://itimg.kr/809/REISE/O/1.png',
+    skills: ['성검 발동', '용사의 일격', '정의의 외침']
+  },
+  {
+    id: 'selene',
+    factionId: 'aclay',
+    name: '셀렌',
+    role: '마도사',
+    description: '냉정하고 이성적이며 논리적인 분석가입니다.',
+    backstory: '최연소 궁정 마법사 출신의 천재입니다. 오드아이를 가졌으며, 감정에 휘둘리지 않고 마법을 분석합니다.',
+    stats: { strength: 20, magic: 98, agility: 60, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/P/1.png',
+    skills: ['마법 분석', '고속 영창', '원소 마법']
+  },
+  {
+    id: 'ravi',
+    factionId: 'aclay',
+    name: '라비',
+    role: '무투가 / 알바생',
+    description: '쿨하고 상냥하며 성실한 토끼 수인입니다.',
+    backstory: '에르니아 출신으로, 비싼 학비를 벌기 위해 교내 카페에서 알바 중입니다. 강력한 발차기를 주무기로 하는 무투가입니다.',
+    stats: { strength: 85, magic: 20, agility: 95, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/Q/1.png',
+    skills: ['연속 발차기', '고속 이동', '카페 라떼 제조']
+  },
+  {
+    id: 'ravera',
+    factionId: 'aclay',
+    name: '라베라',
+    role: '제2황녀 / 마도사',
+    description: '오만하고 까칠한 욕데레 황녀입니다.',
+    backstory: '언니 라엘리에 대한 열등감과 동경을 동시에 품고 있습니다. 붉은 장발만큼이나 불같은 성격의 마도사입니다.',
+    stats: { strength: 30, magic: 90, agility: 50, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/R/1.png',
+    skills: ['화염 폭발', '마력 방출', '츤데레']
+  },
+  {
+    id: 'elpis',
+    factionId: 'aclay',
+    name: '엘피스',
+    role: '마도사',
+    description: '능글맞고 쿨하며 세련된 여유를 가진 엘프입니다.',
+    backstory: '엘리시움 출신의 230세 엘프입니다. 연륜에서 묻어나는 여유와 강력한 마법 실력을 겸비했습니다.',
+    stats: { strength: 40, magic: 92, agility: 70, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/S/1.png',
+    skills: ['자연 마법', '정령 친화', '능글맞은 조언']
+  },
+  {
+    id: 'wifi',
+    factionId: 'aclay',
+    name: '위피',
+    role: '마공학자 / 탱커',
+    description: '항상 졸리고 귀찮아하며 맹한 표정의 드워프입니다.',
+    backstory: '드워프 마을 출신으로 뛰어난 마공학 지식을 가졌습니다. 거대한 방패와 마공학 장비를 다룹니다.',
+    stats: { strength: 70, magic: 60, agility: 30, defense: 95 },
+    image: 'https://itimg.kr/809/REISE/T/1.png',
+    skills: ['마공학 방패', '자동 방어', '수면']
+  },
+  {
+    id: 'helena',
+    factionId: 'aclay',
+    name: '헬레나',
+    role: '견습 수녀',
+    description: '차분해 보이지만 유혹적이고 능글맞으며, 고혹적인 면이 있는 수녀입니다.',
+    backstory: '성국 엘리아노스 출신의 견습 수녀입니다. 신성력을 다루지만 성격은 꽤나 파격적입니다.',
+    stats: { strength: 40, magic: 85, agility: 50, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/U/1.png',
+    skills: ['신성 치유', '매혹', '능글맞은 설교']
+  },
+  {
+    id: 'notitia',
+    factionId: 'aclay',
+    name: '노티티아',
+    role: '수호룡 / 교장',
+    description: '냉정하고 이성적이며 박식한 설명충 수호룡입니다.',
+    backstory: '1000년을 산 고대 속성의 수호룡이자 아카데미의 교장입니다. 합리와 효율을 중시하며 바보 같은 행동을 싫어합니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/V/1.png',
+    skills: ['고대 마법', '지식의 보고', '팩트 폭격']
+  },
+  {
+    id: 'pris',
+    factionId: 'aclay',
+    name: '프리스',
+    role: '검술 교관',
+    description: '피곤하고 따분해 보이지만 제자를 아끼는 능글맞은 고양이 수인입니다.',
+    backstory: '아카데미의 검술 교관으로, 평소엔 나른하지만 검을 잡으면 눈빛이 변합니다.',
+    stats: { strength: 92, magic: 40, agility: 90, defense: 70 },
+    image: 'https://itimg.kr/809/REISE/W/1.png',
+    skills: ['실전 검술', '약점 간파', '제자 교육']
+  },
+  {
+    id: 'sepia',
+    factionId: 'aclay',
+    name: '세피아',
+    role: '마법 교관',
+    description: '나르시즘이 있고 자신감이 넘치며 박식한 명량 엘프입니다.',
+    backstory: '260세의 엘프 마법 교관입니다. 화려한 외모만큼이나 화려하고 강력한 마법을 구사하며 자신을 사랑합니다.',
+    stats: { strength: 30, magic: 96, agility: 60, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/X/1.png',
+    skills: ['광역 마법', '마법 이론 강의', '자기 자랑']
+  },
+  {
+    id: 'build',
+    factionId: 'aclay',
+    name: '빌드',
+    role: '공학 교관',
+    description: '괴짜 기질이 다분하고 장난기 많으며 활발한 드워프입니다.',
+    backstory: '고글을 쓴 드워프 공학 교관입니다. 알뜰살뜰하게 재료를 모으며 기상천외한 발명품을 만듭니다.',
+    stats: { strength: 60, magic: 70, agility: 50, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/Y/1.png',
+    skills: ['기계 제작', '폭발물 투척', '수리']
+  },
+
+  // 4. 엘리시움 (Elysium)
+  {
+    id: 'tiel',
+    factionId: 'elysium',
+    name: '티엘',
+    role: '마궁수',
+    description: '차분하고 냉정하며 시크한 숲의 수호자입니다.',
+    backstory: '250세의 엘프로 과거 레이나의 동료였습니다. 연두색 머리카락을 휘날리며 백발백중의 마궁술을 보여줍니다.',
+    stats: { strength: 70, magic: 80, agility: 95, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/BA/1.png',
+    skills: ['마력 화살', '정밀 사격', '숲의 은신']
+  },
+  {
+    id: 'ellie',
+    factionId: 'elysium',
+    name: '엘리',
+    role: '정령사',
+    description: '상냥하고 명량하며 순수한 족장의 딸입니다.',
+    backstory: '200세의 엘프로, 몸이 병약하지만 강력한 정령 친화력을 가졌습니다. 하얀 원피스가 잘 어울리는 숲의 아이입니다.',
+    stats: { strength: 10, magic: 95, agility: 40, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/BC/1.png',
+    skills: ['정령 소환', '자연의 치유', '정령과의 대화']
+  },
+  {
+    id: 'ashley',
+    factionId: 'elysium',
+    name: '에슐리',
+    role: '마도사 / 숲의 무녀',
+    description: '능글맞고 물욕이 있으며 장난을 좋아하는 문제아입니다.',
+    backstory: '260세의 엘프 무녀지만, 성격은 현랑하고 자유분방합니다. 신성한 숲의 무녀임에도 장난을 일삼습니다.',
+    stats: { strength: 30, magic: 90, agility: 60, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/CB/1.png',
+    skills: ['고대 마법', '환술', '장난치기']
+  },
+  {
+    id: 'phrygia',
+    factionId: 'elysium',
+    name: '프리시아',
+    role: '차기 족장 후보 (온건파)',
+    description: '상냥하고 자상하며 평화를 사랑하는 따뜻한 리더입니다.',
+    backstory: '240세의 엘프로, 엘리시움의 온건파를 이끄는 차기 족장 후보입니다. 모두를 포용하는 리더십을 가졌습니다.',
+    stats: { strength: 40, magic: 85, agility: 50, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/CD/1.png',
+    skills: ['보호 마법', '평화의 중재', '숲의 축복']
+  },
+  {
+    id: 'alpis',
+    factionId: 'elysium',
+    name: '알피스',
+    role: '차기 족장 후보 (강경파)',
+    description: '냉정하고 효율적이며 현실적인 차분한 엘프입니다.',
+    backstory: '240세의 엘프로, 강경파를 대표합니다. 붉은 눈동자(하얀 동공)가 특징이며, 붉은 실을 이용한 마법을 사용합니다.',
+    stats: { strength: 50, magic: 90, agility: 80, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/DC/1.png',
+    skills: ['붉은 실 조작', '구속 마법', '냉철한 판단']
+  },
+  {
+    id: 'natura',
+    factionId: 'elysium',
+    name: '나투라',
+    role: '수호룡',
+    description: '무뚝뚝하고 과묵하며 약간은 맹한 면이 있는 수호룡입니다.',
+    backstory: '1000년을 살아온 자연 속성의 수호룡입니다. 말을 하지 않고 수화로 소통하며 숲을 지킵니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/DE/1.png',
+    skills: ['자연 조작', '덩굴 구속', '수화 통역']
+  },
+
+  // 5. 에르니아 (Ernia)
+  {
+    id: 'ruri',
+    factionId: 'ernia',
+    name: '루리',
+    role: '견습 기사',
+    description: '명량하고 차분하며 쿨하지만 즉흥적인 개 수인입니다.',
+    backstory: '파란색 머리의 견습 기사로 부지런히 수련합니다. 쿨해 보이지만 꼬리는 솔직하게 반응합니다.',
+    stats: { strength: 75, magic: 20, agility: 80, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/ED/1.png',
+    skills: ['검술', '추적', '부지런한 순찰']
+  },
+  {
+    id: 'charles',
+    factionId: 'ernia',
+    name: '샤를',
+    role: '도적단 리더',
+    description: '장난기 많고 능글맞으며 요염한 메스가키 고양이 수인입니다.',
+    backstory: '도적단을 이끄는 리더로, 분홍색 단발이 매력적입니다. 검은 로브를 두르고 은밀하고 빠르게 움직입니다.',
+    stats: { strength: 60, magic: 40, agility: 95, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/EF/1.png',
+    skills: ['암습', '소매치기', '도주']
+  },
+  {
+    id: 'lazuli',
+    factionId: 'ernia',
+    name: '라줄리',
+    role: '기사단장 / 마검사',
+    description: '무뚝뚝하고 시크하며 차분하고 정직한 늑대 수인입니다.',
+    backstory: '에르니아의 기사단장으로 라피스의 언니입니다. 검은 제복을 입고 마검을 휘두르며 왕국을 수호합니다.',
+    stats: { strength: 90, magic: 70, agility: 85, defense: 80 },
+    image: 'https://itimg.kr/809/REISE/FE/1.png',
+    skills: ['마검술', '지휘', '늑대의 포효']
+  },
+  {
+    id: 'taiga',
+    factionId: 'ernia',
+    name: '타이가',
+    role: '기사단 부단장 / 무투가',
+    description: '활발하고 열혈적이며 호전적인 호랑이 수인입니다.',
+    backstory: '기사단 부단장으로 주황색 웨이브 머리가 특징입니다. 갑옷과 팔 붕대를 감고 전장을 누빕니다.',
+    stats: { strength: 95, magic: 20, agility: 80, defense: 75 },
+    image: 'https://itimg.kr/809/REISE/FG/1.png',
+    skills: ['호권', '맹호 격파', '열혈 외침']
+  },
+  {
+    id: 'christa',
+    factionId: 'ernia',
+    name: '크리스타',
+    role: '시장가 실세 / 요술사',
+    description: '교활하고 고혹적이며 매혹적인 여우 수인입니다.',
+    backstory: '시장가의 실세로, 효율과 계획을 중시하는 음흉한 책략가입니다. "~사와요" 말투를 사용합니다.',
+    stats: { strength: 30, magic: 90, agility: 60, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/GF/1.png',
+    skills: ['현혹', '정보 조작', '요술 부채']
+  },
+  {
+    id: 'mu',
+    factionId: 'ernia',
+    name: '무',
+    role: '보좌관 / 마법사',
+    description: '무뚝뚝하고 계획적이며 차분하지만 어딘가 맹한 쥐 수인입니다.',
+    backstory: '크리스타의 보좌관으로 부지런하게 업무를 처리합니다. 회색 트윈테일과 조끼 복장이 단정합니다.',
+    stats: { strength: 20, magic: 75, agility: 70, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/GH/1.png',
+    skills: ['보좌 업무', '계산', '마법 지원']
+  },
+  {
+    id: 'laia',
+    factionId: 'ernia',
+    name: '라이아',
+    role: '에르니아의 왕 / 대검사',
+    description: '차분하고 냉정하며 고심이 많은 사자 수인 왕입니다.',
+    backstory: '금발의 사자 수인으로 에르니아를 통치합니다. 효율을 중시하며 왕으로서의 고뇌를 안고 있습니다.',
+    stats: { strength: 98, magic: 50, agility: 70, defense: 90 },
+    image: 'https://itimg.kr/809/REISE/HG/1.png',
+    skills: ['왕의 위엄', '대검술', '포효']
+  },
+  {
+    id: 'hecate',
+    factionId: 'ernia',
+    name: '헤카테',
+    role: '수호룡',
+    description: '호전적이고 열혈적이며 능글맞은 메스가키 수호룡입니다.',
+    backstory: '1000년을 산 불속성의 수호룡입니다. 붉은 트윈테일이 특징이며, 무식하지만 힘은 압도적입니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/HI/1.png',
+    skills: ['화염 폭발', '용의 힘', '도발']
+  },
+
+  // 6. 엘리아노스 (Elianos)
+  {
+    id: 'freya',
+    factionId: 'elianos',
+    name: '프레이아',
+    role: '성녀',
+    description: '까칠하고 거친 욕데레지만 속마음은 착한 성녀입니다.',
+    backstory: '백은발의 성녀로, 성녀복을 입고 있지만 입은 험합니다. 하지만 신성력만큼은 누구보다 강력합니다.',
+    stats: { strength: 20, magic: 95, agility: 40, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/IH/1.png',
+    skills: ['고위 신성력', '대규모 축복', '거친 위로']
+  },
+  {
+    id: 'velvet',
+    factionId: 'elianos',
+    name: '벨벳',
+    role: '전담 수녀 / 마도사',
+    description: '능글맞고 나른하며 게으른 아저씨 같은 까마귀 수인입니다.',
+    backstory: '프레이아를 전담하는 수녀입니다. 수녀복을 입고 있지만 번개 창을 다루는 강력한 마도사입니다.',
+    stats: { strength: 60, magic: 90, agility: 80, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/IJ/1.png',
+    skills: ['뇌전 창', '비행', '농땡이']
+  },
+  {
+    id: 'ecula',
+    factionId: 'elianos',
+    name: '에큘라',
+    role: '이단심문관 / 자객',
+    description: '능글맞고 교활하며 장난을 좋아하는 고혹적인 뱀 수인입니다.',
+    backstory: '이단심문관으로 활동하며 자객 복장을 하고 있습니다. 오드아이와 민트색 단발이 특징이며 단검술의 달인입니다.',
+    stats: { strength: 60, magic: 50, agility: 95, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/JI/1.png',
+    skills: ['단검 암살', '독 사용', '심문']
+  },
+  {
+    id: 'alberto',
+    factionId: 'elianos',
+    name: '알베르토',
+    role: '교황',
+    description: '자상하고 인자하며 차분하고 겸손한 젊은 교황입니다.',
+    backstory: '30세의 젊은 나이에 교황이 되었습니다. 미숙하다고 생각하지만 용기와 책임감을 가지고 최선을 다합니다.',
+    stats: { strength: 50, magic: 85, agility: 40, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/JK/1.png',
+    skills: ['신의 권능', '축복', '설교']
+  },
+  {
+    id: 'pistis',
+    factionId: 'elianos',
+    name: '피스티스',
+    role: '수호룡',
+    description: '직설적이고 차분하며 신중하지만 뻔뻔한 면이 있는 수호룡입니다.',
+    backstory: '1000년을 산 축복 속성의 수호룡입니다. 하얀 로브를 입고 금발 히메컷을 한 모습으로 엘리아노스를 수호합니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/KJ/1.png',
+    skills: ['절대 축복', '신성 방어', '직언']
+  },
+
+  // 7. 아틀란티스 (Atlantis)
+  {
+    id: 'shek',
+    factionId: 'atlantis',
+    name: '셰크',
+    role: '말썽쟁이',
+    description: '활발하고 장난기 넘치며 광기와 순수가 공존하는 상어 수인입니다.',
+    backstory: '아틀란티스의 말썽쟁이로 닻을 무기로 사용합니다. 검은 상어 후드를 쓰고 쾌락을 좇아 움직입니다.',
+    stats: { strength: 90, magic: 30, agility: 80, defense: 70 },
+    image: 'https://itimg.kr/809/REISE/KL/1.png',
+    skills: ['닻 휘드르기', '광란', '물어뜯기']
+  },
+  {
+    id: 'altia',
+    factionId: 'atlantis',
+    name: '알티아',
+    role: '안내원 / 검사',
+    description: '상냥하고 차분하며 겸손하고 세련된 범고래 수인입니다.',
+    backstory: '아틀란티스의 안내원으로 하얀 브릿지가 들어간 검은 장발이 특징입니다. 합리적인 사고방식을 가졌습니다.',
+    stats: { strength: 75, magic: 40, agility: 75, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/LK/1.png',
+    skills: ['유려한 검술', '수중 안내', '초음파 탐지']
+  },
+  {
+    id: 'whaley',
+    factionId: 'atlantis',
+    name: '웨일리',
+    role: '군주 / 마법사',
+    description: '순수하고 장난기가 있지만, 내면의 불안과 허세를 가진 어린 군주입니다.',
+    backstory: '고래 수인으로 아틀란티스의 어린 군주입니다. 마리누스의 제자이며 왕관의 무게를 견디려 노력합니다.',
+    stats: { strength: 40, magic: 85, agility: 40, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/LM/1.png',
+    skills: ['파도 소환', '물 대포', '왕의 명령']
+  },
+  {
+    id: 'marinus',
+    factionId: 'atlantis',
+    name: '마리누스',
+    role: '수호룡',
+    description: '냉정하고 차분하며 현실적이지만 말이 많고 집요한 수호룡입니다.',
+    backstory: '1000년을 산 물 속성의 수호룡이자 웨일리의 스승입니다. 정장을 입고 있으며 잔소리가 심합니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/ML/1.png',
+    skills: ['대해일', '수압 제어', '심해의 공포']
+  },
+
+  // 8. 드워프 마을 (Dwarf)
+  {
+    id: 'aisha',
+    factionId: 'dwarf',
+    name: '아이샤',
+    role: '안내원 / 마법사',
+    description: '순수하고 명량하며 상냥하고 활발한 드워프 소녀입니다.',
+    backstory: '드워프 마을의 안내원으로 별빛 눈동자를 가졌습니다. 하얀 원피스를 입고 밝은 에너지로 손님을 맞이합니다.',
+    stats: { strength: 30, magic: 70, agility: 50, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/MN/1.png',
+    skills: ['빛 마법', '친절한 안내', '활기찬 미소']
+  },
+  {
+    id: 'tie',
+    factionId: 'dwarf',
+    name: '티에',
+    role: '대장장이',
+    description: '냉정하고 쿨하며 집요한 전문성을 가진 괴짜 드워프입니다.',
+    backstory: '분홍색 포니테일을 한 실력 있는 대장장이입니다. 고글과 장갑을 끼고 완벽한 도구를 만들어냅니다.',
+    stats: { strength: 80, magic: 40, agility: 60, defense: 70 },
+    image: 'https://itimg.kr/809/REISE/NO/1.png',
+    skills: ['전설적 제련', '도구 감정', '정밀 타격']
+  },
+  {
+    id: 'eileen',
+    factionId: 'dwarf',
+    name: '에일린',
+    role: '조수',
+    description: '순수하고 허당끼가 있으며 나른하고 상냥한 드워프입니다.',
+    backstory: '티에의 조수로 일하며, 발렌의 여동생입니다. 실눈 캐릭터로 겉보기엔 유해 보이지만 망치를 꽤 잘 다룹니다.',
+    stats: { strength: 70, magic: 20, agility: 40, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/ON/1.png',
+    skills: ['망치질', '보조 업무', '실수하기']
+  },
+  {
+    id: 'valen',
+    factionId: 'dwarf',
+    name: '발렌',
+    role: '술꾼 / 전사',
+    description: '능글맞고 즉흥적이며 장난을 좋아하고 게으른 드워프입니다.',
+    backstory: '에일린의 오빠로 술을 매우 좋아합니다. 평소엔 게으르지만 싸움이 나면 망치를 들고 나섭니다.',
+    stats: { strength: 85, magic: 10, agility: 50, defense: 80 },
+    image: 'https://itimg.kr/809/REISE/OP/1.png',
+    skills: ['망치 강타', '술 마시기', '취권']
+  },
+  {
+    id: 'tellus',
+    factionId: 'dwarf',
+    name: '텔루스',
+    role: '수호룡',
+    description: '맹하고 피곤해 보이며 추상적인 말을 하지만 돌에 집착하는 수호룡입니다.',
+    backstory: '1000년을 산 땅 속성의 수호룡입니다. 돌을 매우 좋아하며, 고글과 로브를 착용하고 땅의 기운을 다룹니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/PO/1.png',
+    skills: ['지진', '석화', '보석 생성']
+  },
+
+  // 9. 마왕성 (Demon)
+  {
+    id: 'bael',
+    factionId: 'demon',
+    name: '바엘',
+    role: '마왕',
+    description: '쿨한 척하며 허세를 부리지만, 뻔뻔하고 허당끼가 넘치는 마왕입니다.',
+    backstory: '220세의 마왕으로 100년 전 레이나에게 호되게 당한 후 트라우마(PTSD)가 생겼습니다. 은발의 미녀지만 레이나 앞에선 작아집니다.',
+    stats: { strength: 90, magic: 98, agility: 85, defense: 80 },
+    image: 'https://itimg.kr/809/REISE/PQ/1.png',
+    skills: ['마왕의 권능', '허세 부리기', '도망치기']
+  },
+  {
+    id: 'bars',
+    factionId: 'demon',
+    name: '바르스',
+    role: '군단장 / 전사',
+    description: '무뚝뚝하고 강인하며 냉정하고 충성심이 강한 마족입니다.',
+    backstory: '마왕 바엘을 맹목적으로 따르는 군단장입니다. 흑발 포니테일에 역안을 가졌으며, 메이스를 휘두르는 강력한 전사입니다.',
+    stats: { strength: 95, magic: 60, agility: 70, defense: 90 },
+    image: 'https://itimg.kr/809/REISE/QP/1.png',
+    skills: ['메이스 분쇄', '철벽 경호', '충성']
+  },
+  {
+    id: 'riri',
+    factionId: 'demon',
+    name: '리리',
+    role: '군단장 / 서큐버스',
+    description: '능글맞고 유혹적이며 매혹적인 장난꾸러기 서큐버스입니다.',
+    backstory: '하트 동공이 특징인 마족 군단장입니다. 검은 프릴 드레스를 입고 상대를 매혹하여 조종합니다.',
+    stats: { strength: 40, magic: 90, agility: 80, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/QR/1.png',
+    skills: ['매혹의 춤', '정기 흡수', '환각']
+  },
+  {
+    id: 'ever',
+    factionId: 'demon',
+    name: '에버',
+    role: '군단장 / 마법사',
+    description: '능글맞고 현실적이며, 굉장히 직설적인 독설가 엘프입니다.',
+    backstory: '타락한 엘프 군단장입니다. 여유로운 태도로 팩트 폭격을 날리며 강력한 마법을 구사합니다.',
+    stats: { strength: 50, magic: 95, agility: 60, defense: 50 },
+    image: 'https://itimg.kr/809/REISE/RQ/1.png',
+    skills: ['흑마법', '독설', '정신 파괴']
+  },
+  {
+    id: 'philip',
+    factionId: 'demon',
+    name: '필립',
+    role: '군단장 / 무투가',
+    description: '광기에 차 있고 호전적이며 강자에 집착하는 싸움꾼입니다.',
+    backstory: '신입 호랑이 수인 군단장입니다. 백발에 흑색 줄무늬가 있으며, 비키니 갑옷과 강철 건틀릿으로 무장하고 싸움을 찾아다닙니다.',
+    stats: { strength: 92, magic: 40, agility: 90, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/RS/1.png',
+    skills: ['광폭화', '연타', '강자 사냥']
+  },
+  {
+    id: 'moros',
+    factionId: 'demon',
+    name: '모로스',
+    role: '수호룡',
+    description: '능글맞고 장난기가 많으며 고혹적이고 교묘한 세련된 수호룡입니다.',
+    backstory: '1000년을 산 어둠 속성의 수호룡이자 바엘의 친구입니다. 검은 실크 드레스를 입고 배후에서 상황을 조종합니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/SR/1.png',
+    skills: ['어둠 조작', '그림자 이동', '교묘한 속삭임']
+  },
+
+  // 10. 수상한 여관 (Inn)
+  {
+    id: 'nia',
+    factionId: 'inn',
+    name: '니아',
+    role: '여관주인 / 영술사',
+    description: '차분하고 고혹적이며 신비롭고 세련된 겸손한 소녀입니다.',
+    backstory: '수상한 여관의 주인으로 정체를 알 수 없는 신비한 소녀입니다. 오드아이를 가졌으며 랜턴을 들고 영혼을 인도합니다.',
+    stats: { strength: 30, magic: 95, agility: 50, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/ST/1.png',
+    skills: ['영혼 인도', '결계', '손님 맞이']
+  },
+
+  // 11. 안식의 땅 (Rest)
+  {
+    id: 'kespana',
+    factionId: 'rest',
+    name: '케스파나',
+    role: '잊혀진 왕녀 / 반 영령',
+    description: '차분하고 신비로우며 조용하고 겸손한 포용력을 가졌습니다.',
+    backstory: '멸망한 왕국의 잊혀진 왕녀로 반 영령 상태입니다. 검은 드레스와 베일을 쓰고 자신의 존재를 희생해 기적을 일으킵니다.',
+    stats: { strength: 20, magic: 99, agility: 40, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/TS/1.png',
+    skills: ['희생의 기적', '영혼 안식', '비탄']
+  },
+  {
+    id: 'runo',
+    factionId: 'rest',
+    name: '르노',
+    role: '마지막 기사 / 반 영령',
+    description: '무뚝뚝하고 충성스러우며 헌신적이고 고결한 기사입니다.',
+    backstory: '케스파나를 지키는 마지막 근위대장입니다. 전신 갑옷을 입고 있으며 압도적인 수준의 검술로 왕녀를 수호합니다.',
+    stats: { strength: 98, magic: 50, agility: 80, defense: 95 },
+    image: 'https://itimg.kr/809/REISE/TU/1.png',
+    skills: ['절대 수호', '필살 검술', '불멸의 의지']
+  },
+
+  // 12. 드라메스 (Drameth)
+  {
+    id: 'belladonna',
+    factionId: 'drameth',
+    name: '벨라도나',
+    role: '망국의 왕녀 / 흡혈족',
+    description: '냉정하고 까칠하며 세상을 부정하고 증오하는 불안정한 왕녀입니다.',
+    backstory: '멸망한 드라메스의 마지막 생존자입니다. 붉은 눈과 검은 드레스가 특징이며, 혈마법과 낫을 사용하여 복수를 꿈꿉니다.',
+    stats: { strength: 85, magic: 90, agility: 90, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/UT/1.png',
+    skills: ['혈마법', '사신의 낫', '생명 흡수']
+  },
+
+  // 13. 여신 (Gods/Divine) - Faction set to 'goddess'
+  {
+    id: 'risare_char',
+    factionId: 'goddess',
+    name: '리사르',
+    role: '여신 / 마신',
+    description: '무뚝뚝하고 위압적이며 냉정하고 까칠한 마계의 여신입니다.',
+    backstory: '검은 드레스와 검붉은 헤일로를 지닌 마신입니다. 에고소드로 변신할 수 있으며 마신의 권능을 행사합니다.',
+    stats: { strength: 100, magic: 100, agility: 100, defense: 100 },
+    image: 'https://itimg.kr/809/REISE/UV/1.png',
+    skills: ['마신 권능', '에고소드 변신', '멸시']
+  },
+  {
+    id: 'lumiel_char',
+    factionId: 'goddess',
+    name: '루미엘',
+    role: '여신 / 천신',
+    description: '능글맞고 장난기 많으며 상냥하고 활발한 천계의 여신입니다.',
+    backstory: '하얀 드레스와 푸른 헤일로를 지닌 천신입니다. 인간을 사랑하며 에고소드로 변신해 용사를 돕기도 합니다.',
+    stats: { strength: 100, magic: 100, agility: 100, defense: 100 },
+    image: 'https://itimg.kr/809/REISE/VU/1.png',
+    skills: ['천신 권능', '에고소드 변신', '장난']
+  },
+  {
+    id: 'refi_char',
+    factionId: 'goddess',
+    name: '레피',
+    role: '여신 / 외신',
+    description: '능글맞고 순수하며 천진난만하고 엉뚱한 외계의 신입니다.',
+    backstory: '우연히 이 세계에 떨어진 외신입니다. 크리스탈 날개를 가졌으며, 본의 아니게 주변을 오염시키기도 합니다.',
+    stats: { strength: 100, magic: 100, agility: 100, defense: 100 },
+    image: 'https://itimg.kr/809/REISE/VW/1.png',
+    skills: ['외신 권능', '에고소드 변신', '데이터 조작']
   }
 ];
 
@@ -243,6 +983,16 @@ export const REGIONS: Region[] = [
     dangerLevel: '매우 높음 (수압)',
     coordinates: { x: 50, y: 90 }
   },
+  {
+    id: 'goddess',
+    name: '여신',
+    subtitle: '세계의 관찰자',
+    description: '세상을 관장하는 초월적 존재들입니다. 이들은 평소에는 모습을 드러내지 않으나, 에고소드의 형태로 영웅들과 함께하며 세계의 운명을 지켜봅니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/1.png', 
+    guardian: '절대신',
+    dangerLevel: '측정 불가',
+    coordinates: { x: 50, y: 5 }
+  }
 ];
 
 export const WEBTOON_EPISODES: WebtoonEpisode[] = [
