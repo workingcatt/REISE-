@@ -6,8 +6,8 @@ import { SplashScreen } from './components/SplashScreen';
 import { CharacterModal } from './components/CharacterModal';
 import { WorldMap } from './components/WorldMap';
 import { WebtoonGallery } from './components/WebtoonGallery';
-import { CHARACTER_CLASSES, REGIONS } from './constants';
-import { Sword, Menu, X, Star, User, Crown, Volume2, VolumeX } from 'lucide-react';
+import { CHARACTER_CLASSES, REGIONS, TEN_CROWNS } from './constants';
+import { Sword, Menu, X, Star, User, Crown, Volume2, VolumeX, Skull } from 'lucide-react';
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -132,6 +132,7 @@ const App = () => {
               <button onClick={() => scrollToSection('lore')} className="hover:text-reise-dawn transition-colors duration-300">세계관</button>
               <button onClick={() => scrollToSection('classes')} className="hover:text-reise-dawn transition-colors duration-300">영웅</button>
               <button onClick={() => scrollToSection('regions')} className="hover:text-reise-dawn transition-colors duration-300">대륙</button>
+              <button onClick={() => scrollToSection('crowns')} className="hover:text-reise-dawn transition-colors duration-300">왕관</button>
               <button onClick={() => scrollToSection('webtoon')} className="hover:text-reise-dawn transition-colors duration-300">스토리</button>
               <button onClick={() => scrollToSection('oracle')} className="text-reise-gold hover:text-white transition-colors duration-300 drop-shadow-[0_0_5px_rgba(251,191,36,0.5)]">신탁</button>
               
@@ -164,6 +165,7 @@ const App = () => {
                <button onClick={() => scrollToSection('lore')} className="block w-full py-2 hover:text-reise-dawn">세계관</button>
                <button onClick={() => scrollToSection('classes')} className="block w-full py-2 hover:text-reise-dawn">영웅</button>
                <button onClick={() => scrollToSection('regions')} className="block w-full py-2 hover:text-reise-dawn">대륙</button>
+               <button onClick={() => scrollToSection('crowns')} className="block w-full py-2 hover:text-reise-dawn">왕관</button>
                <button onClick={() => scrollToSection('oracle')} className="block w-full py-2 text-reise-gold">신탁</button>
              </div>
           )}
@@ -301,6 +303,69 @@ const App = () => {
                   <p className="text-gray-500 text-sm">업데이트를 기다려주세요.</p>
                 </div>
               )}
+            </div>
+          </section>
+
+          {/* 10 Crowns Section */}
+          <section id="crowns" className="py-32 px-6 bg-[#020410] relative">
+            {/* Dark Atmosphere */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#020410] via-red-950/10 to-[#020410] pointer-events-none"></div>
+            
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="text-center mb-16 space-y-4">
+                <Skull className="w-8 h-8 text-red-500/80 mx-auto animate-pulse" />
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-white drop-shadow-[0_2px_15px_rgba(220,38,38,0.5)]">
+                  10개의 왕관들
+                </h2>
+                <p className="text-gray-400 font-serif max-w-2xl mx-auto">
+                  세계 각지에 존재하는 강력한 마수들. 이들은 일반적인 마수와는 차원이 다른 힘을 지니고 있으며, 각자의 영토에서 절대적인 공포로 군림합니다.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {TEN_CROWNS.map((crown) => (
+                  <div key={crown.id} className="group relative h-auto md:h-[400px] overflow-hidden rounded-sm border border-red-900/20 hover:border-red-500/50 transition-all duration-500 bg-[#0a0a0c] flex flex-col md:block">
+                    
+                    {/* Background Image - Mobile Fix: aspect ratio + object-top */}
+                    <div className="relative md:absolute inset-0 aspect-[4/3] md:aspect-auto w-full">
+                      <img 
+                        src={crown.image} 
+                        alt={crown.name} 
+                        className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-110 opacity-80 md:opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent md:via-black/40 md:opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative md:absolute inset-0 p-6 md:p-8 flex flex-col justify-end transform transition-transform duration-500 md:group-hover:-translate-y-2 bg-[#0a0a0c] md:bg-transparent -mt-10 md:mt-0 pt-12 md:pt-0">
+                      {/* Gradient overlay for mobile text readability overlap */}
+                      <div className="absolute top-[-3rem] left-0 right-0 h-12 bg-gradient-to-t from-[#0a0a0c] to-transparent md:hidden"></div>
+
+                      <div className="mb-auto">
+                        <span className="inline-block px-2 py-1 border border-red-500/30 bg-red-950/30 text-red-400 text-[10px] tracking-widest font-bold uppercase mb-2">
+                           {crown.title}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-2xl font-serif font-bold text-white mb-2 group-hover:text-red-100 transition-colors">
+                        {crown.name}
+                      </h3>
+                      
+                      {/* Description - always visible on mobile, reveal on desktop */}
+                      <div className="space-y-3 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 delay-100 transform md:translate-y-4 md:group-hover:translate-y-0">
+                         <div className="w-8 h-0.5 bg-red-600 mb-3 hidden md:block"></div>
+                         <p className="text-xs text-red-200 font-serif font-bold flex items-center gap-2">
+                           <span className="w-1.5 h-1.5 bg-red-500 rotate-45"></span>
+                           서식지: {crown.location}
+                         </p>
+                         <p className="text-xs text-gray-300 font-serif leading-relaxed line-clamp-3 md:line-clamp-none">
+                           {crown.description}
+                         </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 

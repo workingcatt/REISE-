@@ -55,6 +55,16 @@ export interface Region {
   coordinates: { x: number; y: number };
 }
 
+export interface CrownEntity {
+  id: number;
+  name: string;
+  title: string; // e.g. "첫번째 왕관"
+  location: string;
+  description: string;
+  appearance: string;
+  image: string;
+}
+
 export interface WebtoonEpisode {
   id: number;
   title: string;

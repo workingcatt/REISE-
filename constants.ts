@@ -1,4 +1,4 @@
-import { CharacterClass, Region, WebtoonEpisode, Goddess } from './types';
+import { CharacterClass, Region, WebtoonEpisode, Goddess, CrownEntity } from './types';
 
 export const GODDESSES: Goddess[] = [
   {
@@ -35,7 +35,7 @@ export const GODDESSES: Goddess[] = [
         ]
       },
       {
-        text: "마지막이다. 만약 네가 모든 것을 잃고 홀로 남는다면, 그때 너를 지탱하는 것은 무엇이지?",
+        text: "만약 네가 모든 것을 잃고 홀로 남는다면, 그때 너를 지탱하는 것은 무엇이지?",
         options: [
           { text: "세상을 향한 뜨거운 '복수심'.", affinityPoints: 'rest', trait: 'Revenge' },
           { text: "다시 일어설 수 있다는 '오만함'.", affinityPoints: 'demon', trait: 'Pride' },
@@ -218,8 +218,281 @@ export const BACKGROUND_MAP: Record<number, string> = {
   11: '마왕성',
   12: '수상한 여관',
   13: '안식의 땅',
-  14: '드라메스'
+  14: '드라메스',
+  16: '라엘크라이',
+  17: '레오라이',
+  18: '펠리안',
+  19: '위그실론',
+  20: '그렌룹',
+  21: '벨리시퍼',
+  22: '레비아탄',
+  23: '엘더툰',
+  24: '바이시콘',
+  25: '펜둔테스',
+  26: '블러드 클레모티'
 };
+
+export const TEN_CROWNS: CrownEntity[] = [
+  {
+    id: 17,
+    name: '레오라이',
+    title: '제1왕관',
+    location: '리베르타스 주변 평원',
+    description: '리베르타스 모험가들 사이에서 영물로 취급받는 거대한 마수입니다. 순백의 털과 거대한 날개를 지닌 백색 사자의 형상을 하고 있으며, 그 위엄은 평범한 마수와는 차원이 다릅니다.',
+    appearance: '날개 달린 백색 사자',
+    image: 'https://itimg.kr/809/REISE/BACK/17.png'
+  },
+  {
+    id: 18,
+    name: '펠리안',
+    title: '제2왕관',
+    location: '벨사리온 주변 산맥',
+    description: '벨사리온의 높은 산맥 둥지에서 서식하는 거대한 불사조입니다. 찬란하게 불타오르는 날개는 보는 이들을 압도하며, 제국의 상징적인 존재로 여겨지기도 합니다.',
+    appearance: '거대한 불사조',
+    image: 'https://itimg.kr/809/REISE/BACK/18.png'
+  },
+  {
+    id: 19,
+    name: '위그실론',
+    title: '제3왕관',
+    location: '엘리시움 숲',
+    description: '세계수의 오염된 부분에서 탄생한 기괴한 괴수입니다. 거대한 나무 줄기와 뿌리로 이루어진 형상을 하고 있으며, 세계수의 우주적인 힘을 일부 사용하여 숲을 위협합니다.',
+    appearance: '나무 줄기로 이루어진 거대 괴수',
+    image: 'https://itimg.kr/809/REISE/BACK/19.png'
+  },
+  {
+    id: 20,
+    name: '그렌룹',
+    title: '제4왕관',
+    location: '에르니아 주변 평원',
+    description: '칠흑 같은 검은 털을 가진 거대한 황소입니다. 에르니아의 평원을 질주하며, 산을 들이받아 무너뜨릴 정도의 무지막지한 힘과 속도, 그리고 야생성을 자랑합니다.',
+    appearance: '검은색 거대 황소',
+    image: 'https://itimg.kr/809/REISE/BACK/20.png'
+  },
+  {
+    id: 21,
+    name: '벨리시퍼',
+    title: '제5왕관',
+    location: '엘리아노스 상공',
+    description: '성국 엘리아노스의 천공을 유영하는 거대한 하얀색 뱀입니다. 신성한 땅 위를 날아다니는 그 모습은 신성 모독 그 자체로 여겨지며, 성국의 골칫거리입니다.',
+    appearance: '거대한 하얀색 뱀',
+    image: 'https://itimg.kr/809/REISE/BACK/21.png'
+  },
+  {
+    id: 22,
+    name: '레비아탄',
+    title: '제6왕관',
+    location: '아틀란티스 주변 신전',
+    description: '심해의 신전 주변을 휘감고 있는 거대한 검은 이무기입니다. 바다의 재앙으로 불리며, 아틀란티스의 고대 기술로도 통제가 불가능한 심해의 포식자입니다.',
+    appearance: '거대한 검은 이무기',
+    image: 'https://itimg.kr/809/REISE/BACK/22.png'
+  },
+  {
+    id: 23,
+    name: '엘더툰',
+    title: '제7왕관',
+    location: '드워프 마을 주변 돌산맥',
+    description: '세계에서 가장 거대한 골렘으로, 그 크기는 산의 2배에 달합니다. 평소에는 그저 주변을 천천히 배회하기만 하지만, 그 존재만으로도 지형을 바꿀 만큼 위협적입니다.',
+    appearance: '초거대 골렘',
+    image: 'https://itimg.kr/809/REISE/BACK/23.png'
+  },
+  {
+    id: 24,
+    name: '바이시콘',
+    title: '제8왕관',
+    location: '마왕성 주변',
+    description: '마왕의 애마로 알려진 검은색 말입니다. 이마에 솟은 날카로운 뿔과 불타는 발굽을 가졌으며, 그 속도는 바람보다 빠르다고 전해집니다.',
+    appearance: '검은색 뿔 달린 말',
+    image: 'https://itimg.kr/809/REISE/BACK/24.png'
+  },
+  {
+    id: 25,
+    name: '펜둔테스',
+    title: '제9왕관',
+    location: '안식의 땅',
+    description: '죽음의 땅에서 떠도는 원혼들이 뭉쳐 만들어진 집합체입니다. 거대한 해골의 형상을 하고 있으며, 산 자들의 생명력을 탐욕스럽게 갈구합니다.',
+    appearance: '거대한 해골 모양의 마물',
+    image: 'https://itimg.kr/809/REISE/BACK/25.png'
+  },
+  {
+    id: 26,
+    name: '블러드 클레모티',
+    title: '제10왕관',
+    location: '드라메스 폐허',
+    description: '멸망한 드라메스의 원혼들이 모여 탄생한 피의 용입니다. 악마와 용이 뒤섞인 듯한 끔찍한 형상을 하고 있으며, 폐허를 붉은 피로 물들입니다.',
+    appearance: '거대한 악마 형태의 피의 용',
+    image: 'https://itimg.kr/809/REISE/BACK/26.png'
+  }
+];
+
+export const REGIONS: Region[] = [
+  {
+    id: 'demon',
+    name: '마왕성',
+    subtitle: '단절된 자들의 슬픔',
+    description: '100년 전 전쟁 패배 후 마계로 가는 문이 닫혀 고립된 마족들이 세운 성입니다. 황폐한 땅 위에서 그들은 조용히 생존을 이어가고 있습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/11.png',
+    guardian: '어둠의 수호룡 (마왕 보좌)',
+    dangerLevel: '극도로 위험',
+    coordinates: { x: 50, y: 10 }
+  },
+  {
+    id: 'dwarf',
+    name: '드워프 지하도시',
+    subtitle: '꺼지지 않는 용광로',
+    description: '거대한 고산 지대 지하에 파놓은 광산 도시입니다. 최고의 대장장이들이 전설적인 무구를 만들어내며, 폐쇄적이지만 상인들에겐 열려있습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/10.png',
+    guardian: '대지의 수호룡 (텔루스)',
+    dangerLevel: '높음 (화산 지대)',
+    coordinates: { x: 65, y: 20 }
+  },
+  {
+    id: 'belsarion',
+    name: '제국 벨사리온',
+    subtitle: '강철과 규율의 제국',
+    description: '대륙 최강의 군사력과 기술력을 보유한 유통의 중심지입니다. 인간 중심 사상이 강해 타 종족에 대한 차별이 존재하지만, 그 질서는 견고합니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/4.png',
+    guardian: '황금의 수호룡 (황실 수호)',
+    dangerLevel: '낮음 (치안 완벽)',
+    coordinates: { x: 25, y: 35 }
+  },
+  {
+    id: 'aclay',
+    name: '아클레이 아카데미',
+    subtitle: '지식과 마법의 요람',
+    description: '벨사리온 내에 위치하지만 수호룡의 강력한 비호 아래 치외법권이 적용되는 교육 기관입니다. 자격만 있다면 종족을 불문하고 입학이 가능합니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/5.png',
+    guardian: '지혜의 수호룡 (아카데미장)',
+    dangerLevel: '매우 낮음',
+    coordinates: { x: 32, y: 38 }
+  },
+  {
+    id: 'libertas',
+    name: '리베르타스',
+    subtitle: '자유로운 모험가들의 도시',
+    description: '대륙 중앙에 위치한 모험가 길드 본부가 운영하는 국가입니다. 출신과 종족을 묻지 않는 자유의 상징이며, 수많은 의뢰와 보물이 모이는 곳입니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/2.png',
+    guardian: '자유의 수호룡 (방랑함)',
+    dangerLevel: '보통',
+    coordinates: { x: 50, y: 50 }
+  },
+  {
+    id: 'elysium',
+    name: '엘리시움',
+    subtitle: '세계수가 숨 쉬는 숲',
+    description: '마법의 숲 깊은 곳, 거대한 세계수를 중심으로 형성된 엘프들의 터전입니다. 외부인의 출입을 엄격히 통제하며 숲을 수호합니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/6.png',
+    guardian: '생명의 수호룡 (세계수 둥지)',
+    dangerLevel: '높음 (결계)',
+    coordinates: { x: 75, y: 45 }
+  },
+  {
+    id: 'ernia',
+    name: '에르니아',
+    subtitle: '용맹한 수인들의 왕국',
+    description: '광활한 초원과 숲을 지배하는 수인들의 연합 왕국입니다. 자연과 더불어 살아가며, 육체적인 강함과 명예를 중시합니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/7.png',
+    guardian: '화염의 수호룡 (헤카테)',
+    dangerLevel: '보통',
+    coordinates: { x: 80, y: 60 }
+  },
+  {
+    id: 'rest',
+    name: '안식의 땅',
+    subtitle: '죽음만이 허락된 곳',
+    description: '과거 거대한 저주가 덮쳐 생명체가 살 수 없게 된 죽음의 땅입니다. 과거에는 찬란한 왕국이었으나 지금은 멸망의 흔적만이 남았습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/13.png',
+    guardian: '부재중 (저주로 타락함)',
+    dangerLevel: '생존 불가',
+    coordinates: { x: 15, y: 65 }
+  },
+  {
+    id: 'rest_past',
+    name: '축복의 땅',
+    subtitle: '저주받기 전의 안식의 땅',
+    description: '500년 전, 아직 저주가 내리기 전의 평화롭고 아름다웠던 왕국입니다. 기적과 축복이 가득했던 시절의 모습입니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/13.png',
+    guardian: '수호룡 (생존)',
+    dangerLevel: '낮음',
+    coordinates: { x: 15, y: 65 }
+  },
+  {
+    id: 'inn',
+    name: '수상한 여관',
+    subtitle: '안식의 땅의 신기루',
+    description: '죽음의 땅인 안식의 땅에 홀연히 나타나는 정체불명의 여관입니다. 절망에 빠진 여행자들 앞에만 문을 연다는 소문이 있습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/12.png',
+    guardian: '알 수 없음',
+    dangerLevel: '???' ,
+    coordinates: { x: 18, y: 68 }
+  },
+  {
+    id: 'elianos',
+    name: '성국 엘리아노스',
+    subtitle: '신의 자비가 머무는 곳',
+    description: '거대 성당을 중심으로 신성력을 다루는 중립국입니다. 분쟁을 중재하고 병든 자를 치료하며, 도움이 필요한 곳에 가장 먼저 손을 뻗습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/8.png',
+    guardian: '빛의 수호룡',
+    dangerLevel: '낮음',
+    coordinates: { x: 45, y: 75 }
+  },
+  {
+    id: 'drameth',
+    name: '드라메스',
+    subtitle: '붉은 달의 폐허',
+    description: '과거 대륙 최강이었으나 연합군에 의해 멸망한 흡혈귀들의 나라입니다. 붉은 하늘과 피로 물든 달 아래 폐허만이 남아있습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/14.png',
+    guardian: '수호룡 사망',
+    dangerLevel: '매우 높음 (망령)',
+    coordinates: { x: 90, y: 30 }
+  },
+  {
+    id: 'drameth_past',
+    name: '드라메스 (과거)',
+    subtitle: '붉은 달의 전성기',
+    description: '멸망하기 전, 붉은 달이 가장 아름답게 빛나던 흡혈귀들의 제국입니다. 강력한 혈마법과 고귀한 귀족들이 존재했던 시절입니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/14.png',
+    guardian: '수호룡 (생존)',
+    dangerLevel: '높음',
+    coordinates: { x: 92, y: 28 }
+  },
+  {
+    id: 'atlantis',
+    name: '아틀란티스',
+    subtitle: '심해의 고대 문명',
+    description: '심해 깊은 곳에 존재하는 오버 테크놀로지 국가입니다. 지상과의 교류를 끊고 독자적인 기술 문명을 이룩했습니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/9.png',
+    guardian: '심해의 수호룡',
+    dangerLevel: '매우 높음 (수압)',
+    coordinates: { x: 50, y: 90 }
+  },
+  {
+    id: 'raelcry',
+    name: '라엘크라이',
+    subtitle: '잊혀진 성소',
+    description: '마신을 숭배하며 금단의 힘을 탐구하는 이단 세력입니다. 평소에는 각자 흩어져 활동하지만, 약속된 시기가 오면 잊혀진 성소에 모여 마신을 위한 의식을 거행합니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/16.png',
+    guardian: '타락한 수호룡 (라빌리스)',
+    dangerLevel: '매우 높음 (이단)',
+    coordinates: { x: 85, y: 15 }
+  },
+  {
+    id: 'goddess',
+    name: '여신',
+    subtitle: '세계의 관찰자',
+    description: '세상을 관장하는 초월적 존재들입니다. 이들은 평소에는 모습을 드러내지 않으나, 에고소드의 형태로 영웅들과 함께하며 세계의 운명을 지켜봅니다.',
+    image: 'https://itimg.kr/809/REISE/BACK/1.png', 
+    guardian: '절대신',
+    dangerLevel: '측정 불가',
+    coordinates: { x: 50, y: 5 }
+  }
+];
+
+export const WEBTOON_EPISODES: WebtoonEpisode[] = [
+  { id: 1, title: "프롤로그: 여명의 시작", date: "2024.02.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/1.png?_t=1770734905" },
+  { id: 2, title: "제1화: 운명의 만남", date: "2024.02.15", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/2.png?_t=1770734905" },
+  { id: 3, title: "제2화: 아카데미 입학", date: "2024.03.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/3.png?_t=1770734905" },
+];
 
 export const CHARACTER_CLASSES: CharacterClass[] = [
   // 1. 모험가 길드 (Libertas)
@@ -948,6 +1221,52 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     skills: ['절대 수호', '필살 검술', '불멸의 의지']
   },
 
+  // 11.1. 축복의 땅 (Rest Past)
+  {
+    id: 'kespana_past',
+    factionId: 'rest_past',
+    name: '케스파나',
+    role: '축복의 땅 왕녀',
+    description: '차분하고 신비로우며 조용하고 겸손한, 상냥하고 평화로운 왕녀입니다.',
+    backstory: '21세의 축복의 땅 왕녀입니다. 청록색 장발과 청록색 눈동자, 하얀 드레스와 화관이 특징입니다. 자신의 존재를 소모하여 기적을 일으킵니다.',
+    stats: { strength: 10, magic: 99, agility: 30, defense: 20 },
+    image: 'https://itimg.kr/809/REISE/TT/1.png',
+    skills: ['기적', '희생', '평화의 기도']
+  },
+  {
+    id: 'runo_past',
+    factionId: 'rest_past',
+    name: '르노',
+    role: '근위대장 / 기사',
+    description: '무뚝뚝하고 충성스러우며 헌신적이고 고결한, 용기 있고 냉정한 기사입니다.',
+    backstory: '30세의 케스파나 근위대장입니다. 은색 전신 갑옷과 망토를 두르고 있으며, 압도적인 검술 실력을 가졌습니다.',
+    stats: { strength: 98, magic: 20, agility: 85, defense: 95 },
+    image: 'https://itimg.kr/809/REISE/CC/1.png',
+    skills: ['압도적 검술', '충성', '고결한 의지']
+  },
+  {
+    id: 'nia_past',
+    factionId: 'rest_past',
+    name: '니아',
+    role: '축복의 사제 / 스승',
+    description: '차분하고 고혹적이며 신비롭고 세련된, 겸손하고 상냥한 사제입니다.',
+    backstory: '25세의 축복의 사제이자 케리나의 스승입니다. 단정한 은발 장발과 오드아이(파랑/빨강)가 특징이며, 하얀 로브와 모자를 착용합니다.',
+    stats: { strength: 20, magic: 95, agility: 50, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/SS/1.png',
+    skills: ['마법', '축복', '교육']
+  },
+  {
+    id: 'kerina',
+    factionId: 'rest_past',
+    name: '케리나',
+    role: '선택받은 왕녀',
+    description: '순수하고 상냥하며 병약하고 나긋하지만, 의외로 말괄량이인 차분한 소녀입니다.',
+    backstory: '18세의 선택받은 왕녀지만 병약하여 언니가 대신 나섰습니다. 민트색 단발과 감은 눈이 특징이며, 하얀 드레스와 화관을 착용합니다.',
+    stats: { strength: 10, magic: 85, agility: 30, defense: 10 },
+    image: 'https://itimg.kr/809/REISE/ZZ/1.png',
+    skills: ['불완전한 기적', '순수', '희생']
+  },
+
   // 12. 드라메스 (Drameth)
   {
     id: 'belladonna',
@@ -959,6 +1278,41 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     stats: { strength: 85, magic: 90, agility: 90, defense: 60 },
     image: 'https://itimg.kr/809/REISE/UT/1.png',
     skills: ['혈마법', '사신의 낫', '생명 흡수']
+  },
+  
+  // 12.1. 드라메스 (과거) (Drameth Past)
+  {
+    id: 'belladonna_child',
+    factionId: 'drameth_past',
+    name: '벨라도나 (어린시절)',
+    role: '왕녀 / 혈마법사',
+    description: '냉정하고 귀여우며 순수하고 맹한 구석이 있는 무뚝뚝한 소녀입니다.',
+    backstory: '드라메스의 왕녀로 10살입니다. 파스테라가 귀찮게 굴지만 내심 의지하고 있습니다.',
+    stats: { strength: 30, magic: 95, agility: 50, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/UU/1.png',
+    skills: ['혈마법', '왕녀의 위엄', '멍때리기']
+  },
+  {
+    id: 'rosella',
+    factionId: 'drameth_past',
+    name: '로젤라',
+    role: '영애 / 마안 사용자',
+    description: '오만하고 발랄하며 중2병 기질이 있는 활발한 츤데레입니다.',
+    backstory: '벨라도나의 절친이자 라이벌인 10살 뱀파이어입니다. 한쪽 눈에 안대를 차고 "~사와요" 말투를 씁니다.',
+    stats: { strength: 25, magic: 90, agility: 70, defense: 25 },
+    image: 'https://itimg.kr/809/REISE/YZ/1.png',
+    skills: ['혈마법', '마안 (패션)', '고귀한 웃음']
+  },
+  {
+    id: 'pastera',
+    factionId: 'drameth_past',
+    name: '파스테라',
+    role: '직속 하인 / 보호자',
+    description: '능글맞고 장난기가 많으며 벨라도나를 광적으로 좋아하는 하인입니다.',
+    backstory: '18세의 뱀파이어로 벨라도나의 언니 같은 존재입니다. 평소엔 촐랑거리지만 실력은 확실합니다.',
+    stats: { strength: 80, magic: 85, agility: 90, defense: 60 },
+    image: 'https://itimg.kr/809/REISE/ZY/1.png',
+    skills: ['혈마법', '광적인 애정', '고속 이동']
   },
 
   // 13. 여신 (Gods/Divine) - Faction set to 'goddess'
@@ -994,144 +1348,62 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     stats: { strength: 100, magic: 100, agility: 100, defense: 100 },
     image: 'https://itimg.kr/809/REISE/VW/1.png',
     skills: ['외신 권능', '에고소드 변신', '데이터 조작']
-  }
-];
+  },
 
-export const REGIONS: Region[] = [
+  // 14. 라엘크라이 (Raelcry)
   {
-    id: 'demon',
-    name: '마왕성',
-    subtitle: '단절된 자들의 슬픔',
-    description: '100년 전 전쟁 패배 후 마계로 가는 문이 닫혀 고립된 마족들이 세운 성입니다. 황폐한 땅 위에서 그들은 조용히 생존을 이어가고 있습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/11.png',
-    guardian: '어둠의 수호룡 (마왕 보좌)',
-    dangerLevel: '극도로 위험',
-    coordinates: { x: 50, y: 10 }
+    id: 'ksella',
+    factionId: 'raelcry',
+    name: '크셸라',
+    role: '라엘크라이의 마녀',
+    description: '순수해 보이지만 광기와 음흉함을 숨긴 마녀입니다.',
+    backstory: '성녀의 대척점에 선 존재로, 마신을 광적으로 숭배합니다. 겉으로는 상냥하게 존댓말을 쓰지만 속은 계산적이고 음험합니다.',
+    stats: { strength: 30, magic: 95, agility: 50, defense: 40 },
+    image: 'https://itimg.kr/809/REISE/WV/1.png',
+    skills: ['마신 권능', '광신', '이중인격']
   },
   {
-    id: 'dwarf',
-    name: '드워프 지하도시',
-    subtitle: '꺼지지 않는 용광로',
-    description: '거대한 고산 지대 지하에 파놓은 광산 도시입니다. 최고의 대장장이들이 전설적인 무구를 만들어내며, 폐쇄적이지만 상인들에겐 열려있습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/10.png',
-    guardian: '화염의 수호룡',
-    dangerLevel: '높음 (화산 지대)',
-    coordinates: { x: 65, y: 20 }
+    id: 'keliana',
+    factionId: 'raelcry',
+    name: '켈리아나',
+    role: '성소의 수호자 / 대검사',
+    description: '무뚝뚝하고 고집이 세며 차분한 마족 검사입니다.',
+    backstory: '과거 마왕 후보였으나 바엘에게 패하고 한쪽 눈을 잃었습니다. 현재는 잊혀진 성소를 지키며 묵묵히 임무를 수행합니다.',
+    stats: { strength: 92, magic: 60, agility: 85, defense: 75 },
+    image: 'https://itimg.kr/809/REISE/WX/1.png',
+    skills: ['대검술', '마신 권능', '철벽 수호']
   },
   {
-    id: 'belsarion',
-    name: '제국 벨사리온',
-    subtitle: '강철과 규율의 제국',
-    description: '대륙 최강의 군사력과 기술력을 보유한 유통의 중심지입니다. 인간 중심 사상이 강해 타 종족에 대한 차별이 존재하지만, 그 질서는 견고합니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/4.png',
-    guardian: '황금의 수호룡 (황실 수호)',
-    dangerLevel: '낮음 (치안 완벽)',
-    coordinates: { x: 25, y: 35 }
+    id: 'al',
+    factionId: 'raelcry',
+    name: '알',
+    role: '추방된 대마법사',
+    description: '까칠하고 직설적이며 계산적인 실눈 마법사입니다.',
+    backstory: '금단의 지식을 탐구하다 마법학회에서 추방당했습니다. 마신의 힘을 연구하기 위해 라엘크라이에 합류했으며, 평소에는 눈을 감고 있습니다.',
+    stats: { strength: 20, magic: 98, agility: 50, defense: 30 },
+    image: 'https://itimg.kr/809/REISE/XW/1.png',
+    skills: ['금기 마법', '마신 권능', '약점 간파']
   },
   {
-    id: 'aclay',
-    name: '아클레이 아카데미',
-    subtitle: '지식과 마법의 요람',
-    description: '벨사리온 내에 위치하지만 수호룡의 강력한 비호 아래 치외법권이 적용되는 교육 기관입니다. 자격만 있다면 종족을 불문하고 입학이 가능합니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/5.png',
-    guardian: '지혜의 수호룡 (아카데미장)',
-    dangerLevel: '매우 낮음',
-    coordinates: { x: 32, y: 38 }
+    id: 'crimson',
+    factionId: 'raelcry',
+    name: '크림슨',
+    role: '저주받은 기사',
+    description: '나른하고 오만하며 광기에 찬 크셸라의 오빠입니다.',
+    backstory: '동생 크셸라를 끔찍이 아끼는 저주받은 기사입니다. 전투 시 검은 갑옷의 괴물로 변신하여 적을 유린합니다.',
+    stats: { strength: 90, magic: 70, agility: 60, defense: 90 },
+    image: 'https://itimg.kr/809/REISE/XY/1.png',
+    skills: ['저주받은 갑옷', '마신 권능', '광기']
   },
   {
-    id: 'libertas',
-    name: '리베르타스',
-    subtitle: '자유로운 모험가들의 도시',
-    description: '대륙 중앙에 위치한 모험가 길드 본부가 운영하는 국가입니다. 출신과 종족을 묻지 않는 자유의 상징이며, 수많은 의뢰와 보물이 모이는 곳입니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/2.png',
-    guardian: '자유의 수호룡 (방랑함)',
-    dangerLevel: '보통',
-    coordinates: { x: 50, y: 50 }
-  },
-  {
-    id: 'elysium',
-    name: '엘리시움',
-    subtitle: '세계수가 숨 쉬는 숲',
-    description: '마법의 숲 깊은 곳, 거대한 세계수를 중심으로 형성된 엘프들의 터전입니다. 외부인의 출입을 엄격히 통제하며 숲을 수호합니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/6.png',
-    guardian: '생명의 수호룡 (세계수 둥지)',
-    dangerLevel: '높음 (결계)',
-    coordinates: { x: 75, y: 45 }
-  },
-  {
-    id: 'ernia',
-    name: '에르니아',
-    subtitle: '용맹한 수인들의 왕국',
-    description: '광활한 초원과 숲을 지배하는 수인들의 연합 왕국입니다. 자연과 더불어 살아가며, 육체적인 강함과 명예를 중시합니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/7.png',
-    guardian: '대지의 수호룡',
-    dangerLevel: '보통',
-    coordinates: { x: 80, y: 60 }
-  },
-  {
-    id: 'rest',
-    name: '안식의 땅',
-    subtitle: '죽음만이 허락된 곳',
-    description: '과거 거대한 저주가 덮쳐 생명체가 살 수 없게 된 죽음의 땅입니다. 과거에는 찬란한 왕국이었으나 지금은 멸망의 흔적만이 남았습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/13.png',
-    guardian: '부재중 (저주로 타락함)',
-    dangerLevel: '생존 불가',
-    coordinates: { x: 15, y: 65 }
-  },
-  {
-    id: 'inn',
-    name: '수상한 여관',
-    subtitle: '안식의 땅의 신기루',
-    description: '죽음의 땅인 안식의 땅에 홀연히 나타나는 정체불명의 여관입니다. 절망에 빠진 여행자들 앞에만 문을 연다는 소문이 있습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/12.png',
-    guardian: '알 수 없음',
-    dangerLevel: '???' ,
-    coordinates: { x: 18, y: 68 }
-  },
-  {
-    id: 'elianos',
-    name: '성국 엘리아노스',
-    subtitle: '신의 자비가 머무는 곳',
-    description: '거대 성당을 중심으로 신성력을 다루는 중립국입니다. 분쟁을 중재하고 병든 자를 치료하며, 도움이 필요한 곳에 가장 먼저 손을 뻗습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/8.png',
-    guardian: '빛의 수호룡',
-    dangerLevel: '낮음',
-    coordinates: { x: 45, y: 75 }
-  },
-  {
-    id: 'drameth',
-    name: '드라메스',
-    subtitle: '붉은 달의 폐허',
-    description: '과거 대륙 최강이었으나 연합군에 의해 멸망한 흡혈귀들의 나라입니다. 붉은 하늘과 피로 물든 달 아래 폐허만이 남아있습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/14.png',
-    guardian: '수호룡 사망',
-    dangerLevel: '매우 높음 (망령)',
-    coordinates: { x: 90, y: 30 }
-  },
-  {
-    id: 'atlantis',
-    name: '아틀란티스',
-    subtitle: '심해의 고대 문명',
-    description: '심해 깊은 곳에 존재하는 오버 테크놀로지 국가입니다. 지상과의 교류를 끊고 독자적인 기술 문명을 이룩했습니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/9.png',
-    guardian: '심해의 수호룡',
-    dangerLevel: '매우 높음 (수압)',
-    coordinates: { x: 50, y: 90 }
-  },
-  {
-    id: 'goddess',
-    name: '여신',
-    subtitle: '세계의 관찰자',
-    description: '세상을 관장하는 초월적 존재들입니다. 이들은 평소에는 모습을 드러내지 않으나, 에고소드의 형태로 영웅들과 함께하며 세계의 운명을 지켜봅니다.',
-    image: 'https://itimg.kr/809/REISE/BACK/1.png', 
-    guardian: '절대신',
-    dangerLevel: '측정 불가',
-    coordinates: { x: 50, y: 5 }
+    id: 'labilis',
+    factionId: 'raelcry',
+    name: '라빌리스',
+    role: '타락한 수호룡',
+    description: '나른하고 맹하며 어딘가 망가진 듯한 타락한 수호룡입니다.',
+    backstory: '1000년을 살았으나 타락하여 저주 속성을 가지게 되었습니다. 현재는 크셸라에게 사육당하고 있으며, 사슬에 묶여 지냅니다.',
+    stats: { strength: 99, magic: 99, agility: 99, defense: 99 },
+    image: 'https://itimg.kr/809/REISE/YX/1.png',
+    skills: ['저주 파동', '용의 숨결', '구속']
   }
-];
-
-export const WEBTOON_EPISODES: WebtoonEpisode[] = [
-  { id: 1, title: "프롤로그: 여명의 시작", date: "2024.02.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/1.png?_t=1770734905" },
-  { id: 2, title: "제1화: 운명의 만남", date: "2024.02.15", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/2.png?_t=1770734905" },
-  { id: 3, title: "제2화: 아카데미 입학", date: "2024.03.01", thumbnail: "https://itimg.kr/809/웹툰모음/REISE/3.png?_t=1770734905" },
 ];

@@ -138,7 +138,7 @@ export const OracleSection: React.FC = () => {
           affinity: matchedRegion ? matchedRegion.name : "방랑자",
           soulColor: color,
           potential: potential,
-          emotion: 5
+          emotion: 2 // Changed from 5 (crying) to 2 (smiling)
       });
   };
 
@@ -226,7 +226,7 @@ export const OracleSection: React.FC = () => {
 
                {/* Full Size Character Portrait */}
                <img 
-                 src={getCharUrl(selectedGoddess.imageCode, step === 'result' ? 5 : 1)} 
+                 src={getCharUrl(selectedGoddess.imageCode, step === 'result' ? 2 : 1)} // Changed from 5 to 2 for smiling face
                  alt={selectedGoddess.name} 
                  className={`
                    absolute inset-0 w-full h-full object-cover transition-all duration-700 z-10
